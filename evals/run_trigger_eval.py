@@ -121,6 +121,10 @@ def main():
     cmd_dir = Path.cwd() / ".claude" / "commands"
     cmd_dir.mkdir(parents=True, exist_ok=True)
     shim = cmd_dir / f"{shim_name}.md"
+    # 清掉历史遗留的同类 shim：上游 run_eval 或中断的运行可能没清理。残留 shim 会让
+    # 模型调用到旧的那个，而检测器只认本轮名 → 假阴性（实测已踩到）。
+    for stale in cmd_dir.glob(f"{skill_name}-skill-*.md"):
+        stale.unlink()
     indented = "\n  ".join(desc.split("\n"))
     shim.write_text(f"---\ndescription: |\n  {indented}\n---\n\n# {skill_name}\n",
                     encoding="utf-8")
@@ -159,8 +163,8 @@ def main():
             results.append({"query": q, "should_trigger": should,
                             "trigger_rate": round(rate, 3), "pass": ok})
     finally:
-        if shim.exists():
-            shim.unlink()
+        for stale in cmd_dir.glob(f"{skill_name}-skill-*.md"):
+            stale.unlink()
 
     passed = sum(1 for r in results if r["pass"])
     print(f"description: {desc[:80]}...")
