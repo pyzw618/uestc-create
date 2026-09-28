@@ -9,10 +9,22 @@
 用法：
     python cjk.py fix  <file.pptx|file.docx> [--latin Arial] [--ea 微软雅黑]
     python cjk.py dump <file.pptx|file.docx>          # 列出文件中出现的字体
+
+`--ea` 留空时按平台取默认中文字体（Windows 微软雅黑 / macOS PingFang SC /
+Linux Noto Sans CJK SC）——写死 Windows 字体名会让 Linux 端解析不到。
 """
 import argparse
 import sys
 from pathlib import Path
+
+
+def default_ea():
+    """按平台返回默认中文字体名。"""
+    if sys.platform.startswith("win"):
+        return "微软雅黑"
+    if sys.platform == "darwin":
+        return "PingFang SC"
+    return "Noto Sans CJK SC"
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -144,9 +156,11 @@ def main():
     ap.add_argument("action", choices=["fix", "dump"])
     ap.add_argument("path")
     ap.add_argument("--latin", default="Times New Roman")
-    ap.add_argument("--ea", default="微软雅黑")
+    ap.add_argument("--ea", default=None,
+                    help="中文字体；留空按平台默认（Windows 微软雅黑 / macOS PingFang SC / Linux Noto Sans CJK SC）")
     ap.add_argument("--out", default=None, help="另存路径（默认原地改，建议另存）")
     a = ap.parse_args()
+    a.ea = a.ea or default_ea()
     p = Path(a.path)
     ext = p.suffix.lower()
     if ext == ".pptx":

@@ -13,7 +13,9 @@
 
 ## 运行环境
 
-依赖：`python-pptx`、`python-docx`、`pymupdf`；渲染需要一个渲染器——**本机 PowerPoint/Word/WPS（Windows 经 `pywin32`）或 LibreOffice**，`render_preview.py` 会自动探测并选最忠实的一个。
+依赖：`python-pptx`、`python-docx`、`pymupdf`；渲染需要一个渲染器——**Windows：PowerPoint / Word / WPS（经 `pywin32` COM）；Linux / macOS：LibreOffice（`soffice`）**，`render_preview.py` 自动探测并选最忠实的一个。
+
+跨平台提示：`cjk.py` 的 `--ea` 留空时按平台取默认中文字体（Windows 微软雅黑 / macOS PingFang SC / Linux Noto Sans CJK SC）——写死 Windows 字体名会让 Linux 端解析不到。`mpl_cjk.py` 找不到中文字体时会**显式告警**（否则中文会静默变成方块）。
 本机开发环境：conda `py12`（Python 3.10）。CLAUDE.md 约定按需选/建环境。
 
 ## 说明

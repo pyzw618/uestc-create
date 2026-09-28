@@ -24,6 +24,9 @@ CANDIDATES = [
     r"C:\Windows\Fonts\simsun.ttc",   # 宋体
     r"/System/Library/Fonts/PingFang.ttc",
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc",
+    "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",     # 文泉驿（Debian/Ubuntu 常见）
+    "/usr/share/fonts/truetype/arphic/uming.ttc",
 ]
 
 
@@ -52,7 +55,13 @@ def setup(font_file=None, base=None):
         except Exception:
             fp = font_manager.FontProperties(fname=path)  # 兜底：直接给 FontProperties
             name = fp.get_name()
-    rcParams["font.sans-serif"] = [name, "Microsoft YaHei", "SimHei", "sans-serif"]
+    else:
+        # 不要静默降级：没字体时中文会变成方块，而这是最难自查的一类错
+        print("⚠ mpl_cjk：未找到中文字体文件（已试 微软雅黑/黑体/宋体/PingFang/Noto CJK）。"
+              "图表中的中文很可能渲染成方块（□）。请安装一款中文字体，"
+              "或用 --font-file 指定 .ttf/.ttc 路径。", file=sys.stderr)
+    rcParams["font.sans-serif"] = [name, "Microsoft YaHei", "SimHei",
+                                   "PingFang SC", "Noto Sans CJK SC", "sans-serif"]
     rcParams["axes.unicode_minus"] = False             # 负号别用成方块
     return name
 
