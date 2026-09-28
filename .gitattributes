@@ -1,0 +1,13 @@
+# 仓库内含 50MB 二进制素材（官方 PPT 模板/校徽等），显式标注避免被当文本处理
+* text=auto
+
+*.pptx binary
+*.docx binary
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ttf  binary
+*.ttc  binary
+*.zip  binary
