@@ -52,7 +52,7 @@
 | 表格/图注 | 10.5pt（五号）；表题表上方、图题图下方，编号"表N/图N"全文连续 |
 | 代码 | 等宽字体（Consolas/Courier New）10.5pt，可复制文本；长代码进附录 |
 
-用 python-docx 生成时**必须设置 `w:eastAsia`**（方法见 `engines/docx/SKILL.md` §1）。
+用 python-docx 生成时**必须设置 `w:eastAsia`**（否则中文走默认字体）；可直接用 `python scripts/cjk.py fix <file.docx> --ea 宋体` 一次性设置（方法见 `engines/docx/SKILL.md` §1）。
 
 ## 5. 生成方式选择
 

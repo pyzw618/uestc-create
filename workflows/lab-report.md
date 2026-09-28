@@ -35,7 +35,7 @@
 |---|---|
 | 用户给了模板 | 复制用户模板为底版，只填内容（保护其格式） |
 | 标准骨架 + 官方 12 节 | 复制 `assets/lab-report/标准实验报告.docx` 填充（首选），或用 `标准实验报告骨架.docx` 占位符版 |
-| 其他骨架 | 按 `format.md` 参数用 python-docx 程序构建（Heading 样式、eastAsia 字体） |
+| 其他骨架 | 按 `format.md` 参数用 python-docx 程序构建（Heading 样式、eastAsia 字体；生成后可 `scripts/cjk.py fix` 兜底） |
 
 - 合并型：按形态①每实验重复完整骨架（顺序拼接）或形态②信息页一次实验顺次排（见 sections.md §0）。
 - 封面字段从 config 读取；结对/小组报告按用户提供名单。
@@ -53,7 +53,7 @@
 
 先跑机检 `python evals/check_deliverable.py <成品.docx>`（占位符/禁用词/模糊数字/个人信息），hard fail 清零。
 按 `references/lab-report/checklist.md` A→D 逐项过；向用户报告结果（全过 / 未过项+原因）。需要独立判定时派 `evals/grader.md`。
-用 `engines/docx` 能力转 PDF 预览版式（LibreOffice）；有视觉验收能力时按 `engines/visual-judge.md` 渲染页图自查。
+用 `python scripts/render_preview.py <成品.docx>` 转 PDF 并出逐页 PNG；有视觉验收能力时按 `engines/visual-judge.md` 自查。
 
 ## 合并型分支（基础+挑战 / 多实验）
 

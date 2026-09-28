@@ -63,6 +63,10 @@ metadata:
 - 运行环境已安装官方 documents/pdf/presentations 插件时，可**按需委托**其能力；但两者**并非同源**——本包 `engines/*` 是 Z.AI 改造版，脚本与 API 与已装插件不同。**版式、合规与写作纪律一律以本包 references/ 为准**，不要因委托而切换到另一套指令体系。本包 engines/ 在未装插件时独立可用。
 - 生成任何正文性文字（报告各节、论文、PPT 页文字、讲解词）**必须先载入 `references/writing-style.md`** 并按其自查。
 
+## 辅助脚本（`scripts/`）
+
+反复踩的坑已固化为脚本，按需调用：`cjk.py`（pptx `a:ea` / docx `w:eastAsia` 中文字体）、`mpl_cjk.py`（matplotlib 中文）、`pptx_bg.py`（A1 背景克隆 + 重绑图片关系）、`pptx_qa.py`（PPTX 代码 QA）、`render_preview.py`（office→PDF→逐页 PNG）。详见 `scripts/README.md`；依赖 python-pptx / python-docx / pymupdf / LibreOffice。
+
 ## 素材指引
 
 - `assets/slides/templates/`：8 套官方 PPT 模板（红/蓝/白风景/DIY×2/电科院×3）。

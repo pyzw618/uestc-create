@@ -32,10 +32,11 @@
 
 ## D. 技术（engines/pptx 配合）
 
-- [ ] python-pptx 代码 QA：无文本溢出（预算 ≤原文×1.1）、无形状越界、无重叠；文件能重新打开遍历
+- [ ] 代码 QA：`scripts/pptx_qa.py` 无 hard fail（占位符/越界），溢出与重叠告警已处理
 - [ ] 画布 16:9（33.9×19.1cm）；A1 填充后回读形状几何核对
+- [ ] **A1 背景**：背景克隆后确认背景已落位且图片关系有效（`scripts/pptx_bg.py` 已重绑 rId；目录页背景勿套给正文页）
 - [ ] 图片压缩：成品 <20MB（美术型 ≤50MB）；无失效图片链接
-- [ ] 渲染验收：soffice→PDF→PNG 逐页自查（或派 visual-judge）——文本碰撞/溢出/越界清零
+- [ ] 渲染验收：`scripts/render_preview.py` 出页图（或派 visual-judge）——文本碰撞/溢出/越界清零
 
 ## E. 配套交付
 

@@ -26,8 +26,8 @@
 1. 读 `assets/slides/masters/master_*.json`（对应模板的版式占位符几何）→ 按大纲选版式 → python-pptx 填充 → **另存新文件**。**只有红/蓝/白风景/DIY 四套有该 JSON**；用户选了电科院/DIY_M 模板时无 JSON，直接落到第 2 步的自由填充路径。
 2. 版式层无占位符的页面（自由文本框型）：解包回读实际形状几何做预算填充（engines/pptx 模板工作流：Clone & fill / Fill-in 判据）。
 3. 图表按 `references/slides/charts.md`：原生图表优先；模板 accent 色接管图表配色。
-4. **页面级背景图**（官方红/蓝/白实测）：模板的设计背景不在版式层，而在个别页面的 `<p:bg>` blipFill 里（如官方蓝仅 4 页：封面 bg/目录 bg/致谢 bg，内容页为母版素底）。处理：新增页先加幻灯片，再从对应模板页 deepcopy `<p:bg>`、重绑图片关系（relate_to 后改写 r:embed）插入新页 cSld 首位，最后删除模板原始页。**注意背景图上烙有的文字**（目录页自带"目 录 CONTENTS"标题）——该背景只能给对应功能的页面用，正文勿套。
-5. python-pptx 中日韩字体：设 `a:ea`（DrawingML），在 `a:latin` 后插入 `a:ea typeface="微软雅黑"`（0.6.x 无 font._element 别名，用 `run._r.get_or_add_rPr()`；`w:eastAsia` 是 docx 的写法，对 pptx 无效）。matplotlib 中文：老版本无 `addfont`，用 `font_manager.FontProperties(fname=...msyh.ttc)` + `FontEntry` 注册。
+4. **页面级背景图**（官方红/蓝/白实测）：背景不在版式层，而在个别页面的 `<p:bg>` blipFill 里（官方蓝仅 4 页有：封面/目录/致谢，内容页为母版素底）。用 `python scripts/pptx_bg.py --pptx T.pptx --from <源页> --to <目标页…> [--delete-source] --out out.pptx` 克隆——脚本已处理**必须重绑图片关系**（直接复制 rId 会在目标页解析不到、背景丢失）。**背景图上烙有文字**（目录页自带"目 录"），只能给对应功能页复用。
+5. **中日韩字体**：pptx 必须设 DrawingML 的 `a:ea`（`w:eastAsia` 是 docx 写法，对 pptx 无效）；生成后兜底跑 `python scripts/cjk.py fix <file.pptx> --ea 微软雅黑`。matplotlib 中文用 `scripts/mpl_cjk.py`（自动注册本机中文字体，避免方块）。
 
 ### A2 自建设计
 1. 按 `references/slides/brand.md`：选配色家族（蓝橙学术风/深蓝高级风/深蓝科技风/主题化配色/校徽蓝+银杏黄特色）。
@@ -47,8 +47,8 @@
 ## ⚠ 第 4 步：验收（硬性）
 
 1. 机检：`python evals/check_deliverable.py <成品.pptx>` 跑客观断言（占位符/禁用词/模糊数字/个人信息/密度），hard fail 先清零。
-2. 代码 QA：python-pptx 遍历检查溢出/越界/重叠/占位符残留（engines/pptx §10）。
-3. 渲染 QA：soffice→PDF→PNG 逐页图，按 `engines/visual-judge.md` 提示词验收（无子 agent 则自查）；fail 项修复后复查。
+2. 代码 QA：`python scripts/pptx_qa.py <成品.pptx>`（占位符/越界/溢出估算/文本重叠）；细节按 engines/pptx §10。
+3. 渲染 QA：`python scripts/render_preview.py <成品.pptx>` 出逐页 PNG，按 `engines/visual-judge.md` 提示词验收（无子 agent 则自查）；fail 项修复后复查。
 4. 过 `references/slides/checklist.md` A→E；需要独立判定时派 `evals/grader.md`，报告结果。
 
 ## 边界

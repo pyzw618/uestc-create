@@ -9,7 +9,7 @@
 1. 把整个 `uestc-create/` 文件夹拷入所用 agent 的技能目录（如 `~/.agents/skills/` 或对应配置的 skills 路径），或按所用工具的方式注册该文件夹为技能。
 2. 填写 `config/user.yaml`（姓名/学号/学院/专业）——首次使用可从 `config/user.yaml.example` 复制一份再填；留空则首次生成封面时会引导你填。该文件只在本机，已在 `.gitignore` 中忽略，随包分发时不会被带走。
 3. 依赖（按需，缺什么装什么）：
-   - Python 3 + `python-pptx`、`python-docx`、`Pillow`、`pypdf`
+   - Python 3 + `python-pptx`、`python-docx`、`Pillow`、`pypdf`、`matplotlib`、`pymupdf`（后两者供 `scripts/` 的图表与渲染）
    - [LibreOffice](https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/)（.doc→.docx、文档→PDF、渲染预览；清华镜像快）
    - TeX Live（XeLaTeX + latexmk，仅 LaTeX 论文需要；`assets/course-papers/latex/` 编译验证过）
    - Node.js + `pptxgenjs`（pptx 引擎的 JS 生成轨，可选；python-pptx 轨不需要）
@@ -28,8 +28,11 @@ SKILL.md                总路由（先读这个）
 config/user.yaml        你的信息（只存在本机）
 workflows/              四条路线的工作流
 references/             写作纪律(writing-style.md) + 各路线规范
+scripts/                固化脚本（cjk / mpl_cjk / pptx_bg / pptx_qa / render_preview）
+evals/                  机检与评测（check_deliverable / run_trigger_eval / grader）
 assets/
-  slides/templates/     8 套官方 PPT 模板 + masters/ 母版几何 JSON
+  slides/templates/     8 套官方 PPT 模板
+  slides/masters/       红/蓝/白风景/DIY 四套母版几何 JSON（其余 4 套无，走自由填充）
   slides/brand/         校徽/校标/院徽/线稿/银杏 等官方素材
   icons-charts/         图表 SVG 模板 ×33 + 精选图标 ×570
   course-papers/        论文/课设模板 + LaTeX 模板
@@ -53,7 +56,7 @@ engines/
 | `engines/docx\|pdf\|pptx`、`engines/visual-judge.md` | 改造自 Z.AI 官方 documents/pdf/presentations 技能（v1.1 完整内容随包：routes/scenes/references/scripts、briefs/typesetting/configs 等），`LICENSE.txt` 原样保留 | **个人/教育/非商业用途**；本技能包本身即非商业教育用途。docx 的 `postcheck.py` 需 Python ≥ 3.9（解释器过旧时按其 §7 手工清单自查，脚本完好勿改） |
 | 官方 PPT 模板、校徽、校训、学院标识 | 电子科技大学官方视觉物料 | **仅限校内学习使用**，请勿用于商业或对外宣传；如有侵权请联系删除 |
 | 图表/图标资产 | [ppt-master](https://github.com/hugohe3/ppt-master) 子集，MIT；图标精选自 Tabler（MIT）、Phosphor（MIT） | 全量库与 CC BY 图标见上游；`THIRD_PARTY_NOTICES.md` 随包保留 |
-| LaTeX 模板 | [uestcreport](https://github.com/)（ThesisUESTC 衍生），LPPL-1.3c | `LICENSE-LPPL-1.3c` 随包保留 |
+| LaTeX 模板 | uestcreport（ThesisUESTC 衍生），LPPL-1.3c | `LICENSE-LPPL-1.3c` 随包保留 |
 
 ### 图标全量获取
 
