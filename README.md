@@ -11,7 +11,6 @@
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-pptxgenjs-5FA04E?logo=nodedotjs&logoColor=white)
 ![LaTeX](https://img.shields.io/badge/XeLaTeX-TeX%20Live-008080?logo=latex&logoColor=white)
-![Samples](https://img.shields.io/badge/%E7%B2%BE%E8%AF%BB%E6%A0%B7%E6%9C%AC-52%20%E4%BB%BD-D4B160)
 ![UESTC](https://img.shields.io/badge/%E7%94%B5%E5%AD%90%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6-UESTC-164C8C)
 
 </div>
@@ -226,7 +225,7 @@ engines/
 
 ## 11. 鸣谢
 
-由衷感谢**计算机科学与工程学院苑同学（珠峰）、集成电路科学与工程学院高同学（强芯）、信息与通信工程学院张同学、物理学院的同学**，他们慷慨提供了自己的高分课程交付物——实验报告、汇报 PPT、课程论文与课设报告共 **52 份**——作为开发期精读样本。本包 `references/` 中的全部写作规律、格式阈值与禁用词表均蒸馏自这些真实样本；样本原件不随包分发，且已全部匿名化（`references/evidence.md`）。
+由衷感谢**计算机科学与工程学院苑同学（珠峰）、集成电路科学与工程学院高同学（强芯）、信息与通信工程学院张同学、物理学院刘同学等**，他们慷慨提供了自己的高分课程交付物——实验报告、汇报 PPT、课程论文与课设报告共 **52 份**——作为开发期精读样本。本包 `references/` 中的全部写作规律、格式阈值与禁用词表均蒸馏自这些真实样本；样本原件不随包分发，且已全部匿名化（`references/evidence.md`）。
 
 同时感谢：
 
