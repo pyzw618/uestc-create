@@ -168,17 +168,17 @@ if [ ${#MISSING_PY[@]} -gt 0 ]; then
     fi
 fi
 
-# ── LibreOffice (install-on-demand, NOT substitutable) ──
+# ── LibreOffice renderer (install only if no Word/WPS is present) ──
 echo ""
 echo "--- LibreOffice (.doc→.docx, DOCX→PDF, visual verification) ---"
 if command -v soffice &>/dev/null; then
     LO_VER=$(soffice --version 2>/dev/null | head -1)
     ok "libreoffice ($LO_VER)"
 else
-    warn "libreoffice not installed — REQUIRED for .doc→.docx, DOCX→PDF, visual checks"
-    info "You MUST install it. FORBIDDEN: using Word/WPS/Pages instead of installing,"
-    info "or skipping the PDF/visual check. A large download is NOT a reason to skip."
-    info "REQUIRED: explain the necessity to the user, say the package is large, THEN install."
+    warn "libreoffice not installed — needed only for .doc→.docx / DOCX→PDF / visual checks"
+    info "FIRST check for an installed equivalent renderer: Word / WPS (Windows, via COM)."
+    info "Using one of those is CORRECT — install LibreOffice only if none is present."
+    info "If you must install: explain the necessity, note the large size, THEN install."
     info "PREFERRED source (fast in China, current build): Tsinghua TUNA mirror"
     info "  https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/"
     info "  Pick the subdir for this platform/arch ($(uname -m)):"
@@ -201,7 +201,7 @@ else
     info "An install left off PATH looks 'not installed' next run and gets reinstalled"
     info "needlessly. If soffice already exists on disk but is off PATH, just link it."
     info "Another program is allowed ONLY after an install attempt has FAILED. Report it."
-    info "No install attempt = no substitute program."
+    info "Install only when no equivalent renderer is already present."
 fi
 
 # ── Summary ──
@@ -210,5 +210,5 @@ echo "============================================"
 echo "  Setup complete."
 echo "  Core: Node.js + docx (npm)"
 echo "  Post-processing: Python + defusedxml"
-echo "  On-demand (not substitutable): LibreOffice"
+echo "  On-demand renderer: LibreOffice (or an installed Word/WPS — prefer what exists)"
 echo "============================================"

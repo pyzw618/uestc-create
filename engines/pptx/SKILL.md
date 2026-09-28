@@ -3,7 +3,7 @@ name: pptx
 metadata:
   author: Z.AI
   version: "1.1"
-description: "Use this skill any time a presentation file is the primary input or output. Covers: creating new .pptx decks from scratch or from an outline/document (pptxgenjs / python-pptx); editing and restyling an existing .pptx; reading and extracting text/structure from a deck (markitdown); and rendering a deck to PDF (LibreOffice) or to per-slide PNG images (pdftoppm) for previews, thumbnails, or visual review. Trigger when the user references a .pptx file by name or path, says 'make/build a deck, slides, presentation, PPT, 幻灯片, 演示文稿, 汇报/路演材料', or asks to convert, export, render, or preview slides as PDF or images (e.g. 'PPT转PDF', 'ppt导出图片', 'turn these slides into a PDF')."
+description: "Use this skill any time a presentation file is the primary input or output. Covers: creating new .pptx decks from scratch or from an outline/document (pptxgenjs / python-pptx); editing and restyling an existing .pptx; reading and extracting text/structure from a deck (markitdown); and rendering a deck to PDF or to per-slide PNG images (any real renderer — PowerPoint / WPS / LibreOffice) for previews, thumbnails, or visual review. Trigger when the user references a .pptx file by name or path, says 'make/build a deck, slides, presentation, PPT, 幻灯片, 演示文稿, 汇报/路演材料', or asks to convert, export, render, or preview slides as PDF or images (e.g. 'PPT转PDF', 'ppt导出图片', 'turn these slides into a PDF')."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 > **本引擎说明（uestc-create）**：本文件源自 Z.AI 官方 presentations 技能（v1.1）改造，适配任意 agent；
@@ -170,13 +170,24 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
 
 **Output QA (before handing the deck over):** the user's original input file is untouched at its original path (unless the user explicitly asked for in-place editing); any backup you created stays next to it — these are NOT temp/retry artifacts. The deliverable is a new file (`<stem>_updated.pptx`), and intermediate renders (the PDF and per-slide PNGs from the commands below) are cleaned up.
 
-PPTX → images is **two steps** — `pdftoppm` reads PDF, not `.pptx`, so LibreOffice must convert first:
+PPTX → images = **render to PDF, then rasterize**. **Prefer the bundled helper** — it probes your
+installed renderers and picks the most faithful one:
 
 ```bash
-# Step 1: PPTX → PDF (LibreOffice; also the command for any "export deck as PDF" request)
+python scripts/render_preview.py deck.pptx --outdir <out_dir> --dpi 150
+# prints one PNG path per slide; --list shows detected backends, --backend forces one
+```
+
+Manual equivalent (if you're outside this package, or want the raw commands):
+
+```bash
+# Step 1: PPTX → PDF — use whichever renderer you have:
+#   PowerPoint (Windows, most faithful): COM PowerPoint.Application → SaveAs(pdf, 32)
+#   WPS 演示 (Windows):                   COM KWPP.Application       → SaveAs(pdf, 32)
+#   LibreOffice (any OS):
 soffice --headless --convert-to pdf --outdir <out_dir> deck.pptx
 
-# Step 2: PDF → per-slide PNGs
+# Step 2: PDF → per-slide PNGs (pymupdf needs no extra install; pdftoppm also works)
 pdftoppm -png -r 150 <out_dir>/deck.pdf <out_dir>/slide
 # Generates slide-1.png, slide-2.png, ...
 ```
@@ -186,11 +197,10 @@ pdftoppm -png -r 150 <out_dir>/deck.pdf <out_dir>/slide
 > instance may run at a time — if a conversion hangs, add
 > `--env:UserInstallation=file:///tmp/libreoffice_tmp`.
 >
-> 🔴 **`soffice` not installed? You MUST install it, not substitute it** — using PowerPoint/Keynote/WPS
-> to render instead is forbidden, and a large download is not a reason to skip. Once installed,
-> **register it on `PATH` and re-verify `soffice --version`** so the next probe doesn't reinstall it
-> (step 4 of the hard requirement). See
-> [HARD REQUIREMENT](#-hard-requirement--libreoffice-is-missing) below.
+> 🔴 **No renderer at all?** Install LibreOffice — but only *after* checking that PowerPoint / Word /
+> WPS / Keynote / Pages aren't already present. A native renderer is free of download and *more*
+> faithful for its own format. See
+> [HARD REQUIREMENT](#-hard-requirement--a-real-renderer-is-needed-not-necessarily-libreoffice) below.
 
 ---
 
@@ -694,26 +704,39 @@ Required dependencies (should already be installed):
 - **Poppler**: `sudo apt-get install poppler-utils` (pdftoppm)
 - **defusedxml**: `pip install defusedxml` (secure XML parsing)
 
-### 🔴 HARD REQUIREMENT — LibreOffice is missing
+### 🔴 HARD REQUIREMENT — a real renderer is needed (not necessarily LibreOffice)
 
-Every PPTX → PDF conversion and every rendered preview/thumbnail step depends on LibreOffice.
+**Real rendering is non-negotiable**: only an actual render reveals text overflow and layout
+breakage, and a clean programmatic check is no substitute for it. But the *renderer* need not be
+LibreOffice — **use whatever the machine already has.**
 
-**If LibreOffice is not installed, you MUST install it. This is not a choice.**
+**Probe first, in this order:**
 
-**FORBIDDEN — do not do any of these:**
-- ❌ Using Keynote, Microsoft PowerPoint, WPS Office, or any other program already on the user's
-  machine *instead of* installing LibreOffice.
-- ❌ Deciding on the user's behalf that the download is "too large", "too slow", or "not worth it".
-  **The package being large is NOT a reason to skip the install.** It is expected to be large.
-- ❌ Asking the user "should I use Keynote/PowerPoint instead to save time?" — that is the same
-  violation dressed up as a question. Do not offer the substitution.
-- ❌ Silently degrading (shipping the deck without the render check) to avoid installing.
+| Format | Preferred (most faithful) | Then | Last resort |
+|---|---|---|---|
+| `.pptx` | **PowerPoint** — it *is* the target renderer; LibreOffice substitutes missing fonts and its "overflow / fits" verdict can disagree with the real deck (see Part 1 § Preview caveat) | WPS 演示 | LibreOffice |
+| `.docx` | **Word** | WPS 文字 | LibreOffice |
 
-**REQUIRED sequence — no steps skipped, in this order:**
+- **Windows**: drive PowerPoint / Word / WPS through COM automation
+  (`PowerPoint.Application` / `Word.Application` / `KWPP.Application` / `KWPS.Application` via `pywin32`) — nothing to download.
+- **macOS**: Keynote / Pages, or `soffice`.
+- The bundled `scripts/render_preview.py` already probes and picks the best available backend
+  (`--list` shows what it found; `--backend` forces one). Prefer calling it over hand-rolling commands.
 
-1. **Explain the necessity to the user.** LibreOffice is what renders the deck's real layout —
-   master slides, themes, placeholder geometry — so it is the only way to verify slides actually
-   fit before delivery. Substituting it means shipping an unverified deck.
+**Only when none of these exists** do you install LibreOffice — then follow the sequence below.
+Installing it while a native renderer sits unused wastes several hundred MB and yields a *less*
+faithful preview for that user's own format.
+
+**FORBIDDEN — regardless of which backend you use:**
+- ❌ Skipping the visual check because "no renderer". If genuinely nothing is available, install one
+  (below). Shipping an unverified deck is never the answer.
+- ❌ Deciding on the user's behalf that a download is "too large / not worth it" *when nothing is
+  installed and one must be*.
+
+**REQUIRED sequence — only when no renderer is present:**
+
+1. **Explain the necessity to the user.** A real render is how the deck's actual layout (master
+   slides, themes, placeholder geometry) gets verified before delivery.
 2. **Tell them the download is large** (roughly several hundred MB) and may take a while. This is
    information for the user, **not** a decision point for you — state it and proceed to install.
 3. **Install it now.** **Preferred source — Tsinghua TUNA mirror** (fast in China, current build):
@@ -766,8 +789,8 @@ Every PPTX → PDF conversion and every rendered preview/thumbnail step depends 
    on the user's machine (Keynote, PowerPoint, WPS). Report the install failure and what you
    switched to, and warn that the rendering may differ from this skill's normal checks.
 
-> **The gate is simple: no install attempt = no substitute program.** If you have not run the
-> install command and seen it fail, using Keynote/PowerPoint/WPS is a violation of this skill.
+> **The gate is simple: a real render must actually happen, by whatever real renderer exists** —
+> an installed Keynote/PowerPoint/WPS counts. Install LibreOffice only when nothing is installed.
 
 ---
 

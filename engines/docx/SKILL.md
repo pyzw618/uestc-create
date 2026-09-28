@@ -227,7 +227,7 @@ See `references/chart-templates.md`.
 Any step that calls `libreoffice`/`soffice` (`.doc` → `.docx`, DOCX → PDF, visual verification)
 depends on LibreOffice.
 
-**If LibreOffice is not installed, you MUST install it. This is not a choice.**
+**Real rendering is required — but the renderer need not be LibreOffice. An already-installed PowerPoint/Word/WPS works; install LibreOffice only if none is present.**
 
 **FORBIDDEN — do not do any of these:**
 - ❌ Using Microsoft Word, WPS Office, Pages, or any other program already on the user's machine
@@ -268,8 +268,8 @@ depends on LibreOffice.
    on the user's machine (Word, WPS, Pages). Report the install failure and what you switched to,
    and warn that output fidelity may differ.
 
-> **The gate is simple: no install attempt = no substitute program.** If you have not run the
-> install command and seen it fail, using Word/WPS/Pages/Keynote is a violation of this skill.
+> **The gate is simple: a real render must actually happen, by whatever real renderer exists** —
+> an installed Word/WPS/Pages/Keynote counts. Install LibreOffice only when nothing is installed.
 
 ## Final response（通用交付说明）
 

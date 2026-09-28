@@ -240,8 +240,8 @@ const doc = new Document({
 > `.../libreoffice/stable/`; full commands in `env_setup/setup.md`), with
 > `brew install --cask libreoffice` / `sudo apt install libreoffice-core` /
 > `winget install TheDocumentFoundation.LibreOffice` as fallbacks. Only
-> after an install attempt has **failed** may you use another program. **No install attempt = no
-> substitute program.** After installing, **register `soffice` on `PATH` and re-verify
+> an already-installed Word/WPS is a valid renderer — use it. Install LibreOffice only if none
+> exists. After installing, **register `soffice` on `PATH` and re-verify
 > `soffice --version`** (per-OS commands: `env_setup/setup.md` → *"Register the binary on PATH"*) —
 > an install left off the search path reads as "not installed" next time and gets reinstalled
 > needlessly. Note this is separate from the TOC rule below, which is about field

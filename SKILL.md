@@ -24,7 +24,7 @@ metadata:
 | 依赖 | 用途 | 缺省影响 |
 |---|---|---|
 | Python：`python-pptx` / `python-docx` / `Pillow` / `pypdf` | 生成 pptx / docx / 图片 / PDF | 对应路线无法产出 |
-| LibreOffice（`soffice`） | .doc→.docx、文档→PDF、渲染预览 | 无法转 PDF、无法视觉验收 |
+| 渲染器：**本机已装的 PowerPoint / Word / WPS 即可**，都没有才装 LibreOffice（`soffice`） | .doc→.docx、文档→PDF、渲染预览 | 无法转 PDF、无法视觉验收 |
 | TeX Live（`latexmk` + `xelatex`） | 仅 LaTeX 论文 / beamer | C 路线 LaTeX 轨、A3 支线不可用 |
 | Node + `pptxgenjs` | 仅 pptx 引擎的 JS 轨（可选） | python-pptx 轨不受影响 |
 

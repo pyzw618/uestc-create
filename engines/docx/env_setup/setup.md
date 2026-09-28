@@ -47,7 +47,7 @@ Run the platform-appropriate setup script:
 | npm pkg | docx | Word document creation library |
 | Runtime | Python 3 + pip | Post-processing scripts |
 | Python pkg | defusedxml | Safe XML parsing for validation |
-| On demand (not substitutable) | LibreOffice | `.doc`→`.docx`, DOCX→PDF, visual verification — install it; do not swap in local Word/WPS/Pages |
+| On demand (renderer) | LibreOffice **or** an installed Word/WPS | `.doc`→`.docx`, DOCX→PDF, visual verification — use whichever is already installed; install LibreOffice only if none is present |
 | Font | CJK fonts (from CDN) | Chinese text in documents |
 
 ### Manual Install by Platform
@@ -58,7 +58,7 @@ Run the platform-appropriate setup script:
 brew install node python3
 npm install -g docx
 python3 -m pip install defusedxml
-# On demand, not substitutable: LibreOffice (prefer the Tsinghua mirror below)
+# On demand renderer: LibreOffice — install only if no Word/WPS is present (prefer the Tsinghua mirror below)
 brew install --cask libreoffice
 ```
 
@@ -68,7 +68,7 @@ brew install --cask libreoffice
 sudo apt install nodejs npm python3 python3-pip
 npm install -g docx
 python3 -m pip install defusedxml
-# On demand, not substitutable: LibreOffice (prefer the Tsinghua mirror below)
+# On demand renderer: LibreOffice — install only if no Word/WPS is present (prefer the Tsinghua mirror below)
 sudo apt install libreoffice-core
 ```
 
@@ -79,7 +79,7 @@ winget install OpenJS.NodeJS.LTS
 winget install Python.Python.3.11
 npm install -g docx
 python -m pip install defusedxml
-# On demand, not substitutable: LibreOffice (prefer the Tsinghua mirror below)
+# On demand renderer: LibreOffice — install only if no Word/WPS is present (prefer the Tsinghua mirror below)
 winget install TheDocumentFoundation.LibreOffice
 ```
 

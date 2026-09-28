@@ -232,14 +232,14 @@ else
 fi
 echo ""
 
-# ── Step 2h: LibreOffice (install-on-demand, NOT substitutable) ──
+# ── Step 2h: LibreOffice renderer (install only if no Word/WPS is present) ──
 echo "--- [8/10] LibreOffice (Office→PDF) ---"
 if command -v soffice &>/dev/null; then
     LO_VER=$(soffice --version 2>/dev/null | head -1)
     ok "libreoffice ($LO_VER)"
 else
     warn "libreoffice not installed — REQUIRED for any .docx/.xlsx/.pptx→PDF task"
-    info "You MUST install it. FORBIDDEN: using Word/WPS/Keynote/Pages instead of"
+    info "Install it ONLY if no Word/WPS/Keynote/Pages is present — an installed one is a valid renderer, not a violation."
     info "installing. A large download is NOT a reason to skip -- it is expected to be"
     info "large. REQUIRED: explain the necessity to the user, say the package is large,"
     info "THEN install it."
@@ -265,7 +265,7 @@ else
     info "An install left off PATH looks 'not installed' next run and gets reinstalled"
     info "needlessly. If soffice already exists on disk but is off PATH, just link it."
     info "Another program is allowed ONLY after an install attempt has FAILED. Report it."
-    info "No install attempt = no substitute program."
+    info "Install only when no equivalent renderer is already present."
 fi
 echo ""
 

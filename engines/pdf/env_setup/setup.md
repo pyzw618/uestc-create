@@ -54,7 +54,7 @@ Run the platform-appropriate setup script:
 | Optional | playwright (npm) | HTML-to-PDF for Creative pipeline |
 | Optional | Chromium (via Playwright) | Headless rendering (large download) |
 | Optional | tectonic | LaTeX/Academic PDF compilation |
-| On demand (not substitutable) | LibreOffice | Office-to-PDF conversion — install it; do not swap in local Office/WPS |
+| On demand (use an installed renderer first) | LibreOffice | Office-to-PDF conversion — use an installed Word/WPS if present; install LibreOffice only if none |
 
 > **Covers no longer need Playwright.** All Report/Academic covers render with ReportLab
 > (`scripts/cover_render.py`). Playwright/Chromium is required **only** for the Creative/poster
@@ -70,7 +70,7 @@ Run the platform-appropriate setup script:
 > Tsinghua TUNA mirror** documented in *"LibreOffice — Recommended Download Source"* at the end of
 > this file (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`), falling
 > back to the platform package manager command below. Another program is permitted **only after** an install attempt has actually failed, and that
-> failure must be reported to the user. **No install attempt = no substitute program.**
+> failure must be reported to the user. **Install only when no equivalent renderer is already present.**
 
 ### Manual Install by Platform
 
@@ -88,7 +88,7 @@ npm install -g playwright@1.50.0 && npx playwright install chromium
 
 # ── Optional: Academic/LaTeX (install on demand — downloads packages on first run) ──
 brew install tectonic
-# ── On demand, not substitutable: Office-to-PDF ──
+# ── On demand (installed renderer preferred): Office-to-PDF ──
 # Preferred: Tsinghua mirror — see "LibreOffice — Recommended Download Source" below
 brew install --cask libreoffice   # fallback if the mirror is unreachable
 ```
@@ -106,7 +106,7 @@ npm install -g playwright@1.50.0 && npx playwright install chromium && npx playw
 
 # ── Optional: Academic/LaTeX (install on demand) ──
 conda install -c conda-forge tectonic   # use Tsinghua mirror: conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-# ── On demand, not substitutable: Office-to-PDF ──
+# ── On demand (installed renderer preferred): Office-to-PDF ──
 # Preferred: Tsinghua mirror — see "LibreOffice — Recommended Download Source" below
 sudo apt install libreoffice-core   # fallback if the mirror is unreachable
 ```
@@ -122,7 +122,7 @@ npm install -g playwright@1.50.0
 npx playwright install chromium
 # optional:
 scoop install tectonic                           # LaTeX
-# on demand, not substitutable: prefer the Tsinghua mirror (see section below)
+# on demand, install only if no Word/WPS: prefer the Tsinghua mirror (see section below)
 winget install TheDocumentFoundation.LibreOffice  # Office-to-PDF fallback
 ```
 

@@ -10,7 +10,7 @@
 2. 填写 `config/user.yaml`（姓名/学号/学院/专业）——首次使用可从 `config/user.yaml.example` 复制一份再填；留空则首次生成封面时会引导你填。该文件只在本机，已在 `.gitignore` 中忽略，随包分发时不会被带走。
 3. 依赖（按需，缺什么装什么）：
    - Python 3 + `python-pptx`、`python-docx`、`Pillow`、`pypdf`、`matplotlib`、`pymupdf`（后两者供 `scripts/` 的图表与渲染）
-   - [LibreOffice](https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/)（.doc→.docx、文档→PDF、渲染预览；清华镜像快）
+   - 渲染器（.doc→.docx、文档→PDF、渲染预览）：**本机已装的 PowerPoint / Word / WPS 即可**，无需额外安装（原生渲染对自家格式还更忠实）；三者都没有时再装 [LibreOffice](https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/)（清华镜像快）
    - TeX Live（XeLaTeX + latexmk，仅 LaTeX 论文需要；`assets/course-papers/latex/` 编译验证过）
    - Node.js + `pptxgenjs`（pptx 引擎的 JS 生成轨，可选；python-pptx 轨不需要）
 

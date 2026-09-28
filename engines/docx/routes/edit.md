@@ -27,12 +27,12 @@
 libreoffice --headless --convert-to docx input.doc
 ```
 
-> 🔴 **If `libreoffice` is not installed, you MUST install it — do not substitute.** Using Word, WPS,
-> or Pages *instead of* installing is forbidden, and a large download is **not** a reason to skip it.
-> Required: explain the necessity to the user (only engine that converts legacy `.doc` while
-> preserving styles and layout), tell them the package is large, then install it **from the Tsinghua TUNA mirror** (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, or the newest version under `.../libreoffice/stable/`; package-manager commands are the fallback). Only after an
-> install attempt has actually **failed** may you use another program. **No install attempt = no
-> substitute program.** See the HARD REQUIREMENT block in `SKILL.md`.
+> 🔴 **Need `.doc` → `.docx`?** An installed Word or WPS is a valid converter — use it (no download
+> needed). Only if neither exists should you install LibreOffice: explain the necessity to the user
+> (it is the engine that converts legacy `.doc` while preserving styles and layout), note the package
+> is large, then install it **from the Tsinghua TUNA mirror**
+> (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/`; package managers are the
+> fallback). See the HARD REQUIREMENT block in `SKILL.md`.
 
 ## Step 1: Unpack
 
@@ -86,9 +86,12 @@ pandoc "${STEM}_updated.docx" -t plain -o /dev/stdout | head -50
 libreoffice --headless --convert-to pdf "${STEM}_updated.docx"
 ```
 
-> 🔴 **LibreOffice missing? You MUST install it — do not substitute.** Explain its necessity, say the
-> package is large (not a reason to skip), then install it **from the Tsinghua TUNA mirror** (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, or the newest version under `.../libreoffice/stable/`; package-manager commands are the fallback). Word/WPS is permitted **only** after an
-> install attempt has failed. **No install attempt = no substitute program.** See `SKILL.md`.
+> 🔴 **Need to render/convert but no renderer?** **Word and WPS count as real renderers — use them
+> if present** (Word is *more* faithful than LibreOffice for `.docx`). Only when neither Word, WPS
+> nor LibreOffice exists should you install LibreOffice — explain the necessity, say the package is
+> large (not a reason to skip), and install from the Tsinghua TUNA mirror
+> (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/`, newest version under it;
+> package managers are the fallback). See `SKILL.md`.
 
 ---
 

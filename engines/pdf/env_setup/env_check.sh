@@ -11,10 +11,10 @@ QUIET=false; [ "${1:-}" = "--quiet" ] && QUIET=true
 FAIL=0
 check() { local desc="$1"; shift; if ! "$@" &>/dev/null; then $QUIET || echo "MISSING (core): $desc"; FAIL=1; fi; }
 optional() { local desc="$1"; shift; if "$@" &>/dev/null; then $QUIET || echo "optional OK: $desc"; else $QUIET || echo "optional MISSING: $desc (install on demand)"; fi; }
-# LibreOffice is install-on-demand like the others, but it is NOT substitutable: when an
-# Office→PDF route needs it and it is absent, the model must explain + warn + install, never
-# silently switch to the user's local Office/WPS.
-required_on_demand() { local desc="$1"; shift; if "$@" &>/dev/null; then $QUIET || echo "on-demand OK: $desc"; else $QUIET || echo "on-demand MISSING: $desc — if a route needs it you MUST install it, not substitute it. FORBIDDEN: using Word/WPS/Keynote/Pages instead; a large download is NOT a reason to skip. REQUIRED: explain the necessity to the user, say the package is large, then INSTALL (preferred source: https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/), THEN register it on PATH and re-verify 'soffice --version' (Linux/macOS: ln -sf the binary into /usr/local/bin; Windows: setx the program dir onto the user PATH) — see env_setup/setup.md \"Register the binary on PATH\". FIRST check whether it is already installed but merely off PATH (/opt/libreoffice*/program/soffice, /Applications/LibreOffice.app/Contents/MacOS/soffice) — if so register it instead of reinstalling. No install attempt = no substitute program."; fi; }
+# LibreOffice is install-on-demand like the others, but prefer an installed Word/WPS: when an
+# Office→PDF route needs a renderer, probe for Word/PowerPoint/WPS first; if none, explain + install;
+# never silently degrade. (Using the user's local Office/WPS is fine when it exists.)
+required_on_demand() { local desc="$1"; shift; if "$@" &>/dev/null; then $QUIET || echo "on-demand OK: $desc"; else $QUIET || echo "on-demand MISSING: $desc — needed only when a route must render/convert. FIRST check for an equivalent renderer already installed (Windows: Word/PowerPoint/WPS via COM, pywin32; macOS: Keynote/Pages) — using one of those is CORRECT, not a violation. ONLY if none exists: explain the necessity to the user, say the package is large (not a reason to skip), then INSTALL (preferred source: https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/), THEN register it on PATH and re-verify 'soffice --version' (Linux/macOS: ln -sf the binary into /usr/local/bin; Windows: setx the program dir onto the user PATH) — see env_setup/setup.md \"Register the binary on PATH\". Also check whether it is installed but merely off PATH (/opt/libreoffice*/program/soffice, /Applications/LibreOffice.app/Contents/MacOS/soffice). FORBIDDEN regardless: skipping the PDF/visual check entirely."; fi; }
 
 # ── Resolve PDF_SKILL_DIR & FONT_DIR ──
 _ENV_CHECK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
@@ -53,7 +53,7 @@ else
     $QUIET || echo "optional MISSING: tectonic (LaTeX/Academic; install on demand)"
 fi
 
-# ── ON-DEMAND but NOT substitutable: Office→PDF (LibreOffice/soffice) ──
+# ── ON-DEMAND renderer: Office→PDF (installed Word/WPS, else LibreOffice) ──
 required_on_demand "libreoffice (soffice)" command -v soffice
 
 $QUIET || echo "PDF_SKILL_DIR=$PDF_SKILL_DIR"

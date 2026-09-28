@@ -6,7 +6,7 @@ Work with existing PDFs: extract, merge, split, fill forms, convert formats, or 
 >
 > **LibreOffice/soffice (Office→PDF) is NOT in that category** — do not treat it as an optional engine you may route around. See the hard requirement immediately below.
 >
-> 🔴 **HARD REQUIREMENT — LibreOffice is missing.** Office→PDF (`convert.office`, `soffice`) and the 5-step DOCX pipeline depend on LibreOffice. **If it is not installed, you MUST install it. This is not a choice.**
+> 🔴 **HARD REQUIREMENT — a real renderer is needed** for Office→PDF (`convert.office`) and the 5-step DOCX pipeline. LibreOffice is **not the only option**: an installed Word/PowerPoint/WPS works (and is more faithful for its own format). Probe for those first; install LibreOffice only if none is present.
 >
 > **FORBIDDEN:** ❌ using Microsoft Word/Excel/PowerPoint, WPS Office, Keynote, Pages, or any other program already on the user's machine *instead of* installing LibreOffice. ❌ Deciding for the user that the download is "too large"/"too slow" — **the package being large is NOT a reason to skip the install**; it is expected to be large. ❌ Asking "should I use Word instead to save time?" — that is the same violation dressed up as a question. ❌ Jumping straight to the python-pptx/python-docx + HTML + Playwright fallback to avoid installing.
 >
@@ -18,7 +18,7 @@ Work with existing PDFs: extract, merge, split, fill forms, convert formats, or 
 > 4. **Register the binary on `PATH`, then re-verify `soffice --version`.** An install that leaves `soffice` off the executable search path is indistinguishable from "not installed" to the next probe — that is what causes the same several-hundred-MB package to be downloaded twice. **The mechanism differs per OS:** Linux `sudo ln -sf /opt/libreoffice*/program/soffice /usr/local/bin/soffice`; macOS `sudo ln -sf /Applications/LibreOffice.app/Contents/MacOS/soffice /usr/local/bin/soffice` (or `/opt/homebrew/bin` on Apple Silicon); Windows `setx PATH "$([Environment]::GetEnvironmentVariable('PATH','User'));C:\Program Files\LibreOffice\program"` (affects only new shells — use the full `soffice.exe` path for the rest of the session). Full commands in `env_setup/setup.md` → *"Register the binary on PATH"*. **Probe before installing**: a binary already on disk but off-`PATH` needs registering, not reinstalling.
 > 5. **Only after that install has actually been attempted AND failed** may you use software already on the user's machine, or the Playwright fallback route. Report the install failure and that fidelity will be lower.
 >
-> **The gate is simple: no install attempt = no substitute program.** If you have not run the install command and seen it fail, reaching for Word/WPS/Keynote is a violation of this skill.
+> **The gate is simple: a real render must actually happen, by whatever real renderer exists** — an installed Word/WPS/Keynote counts. Install LibreOffice only when nothing is installed.
 
 
 ---
@@ -278,7 +278,7 @@ soffice --headless --convert-to pdf --outdir ./output input.docx
 - Large files (>50MB) may take 1-2 min; set reasonable timeout
 - soffice HTML→PDF is inferior to Playwright for complex CSS
 
-**Priority**: Always use soffice for Office→PDF (preserves themes, layouts, master slides). If soffice is not installed, **you MUST install it** — follow the **HARD REQUIREMENT** block at the top of this brief: explain the necessity to the user, tell them the package is large (not a reason to skip), then install. The user's local Word/WPS/Keynote and the python-pptx/python-docx + HTML + Playwright route are permitted **only after an install attempt has actually failed** — fidelity will be lower, and you must say so. **No install attempt = no substitute program.** After installing, register `soffice` on `PATH` and re-verify `soffice --version` (step 4 of that block) so the next probe doesn't reinstall it.
+**Priority**: For Office→PDF use whatever real renderer exists — an installed Word/PowerPoint/WPS counts (soffice also fine; it preserves themes, layouts, master slides). If nothing is installed, follow the **HARD REQUIREMENT** block at the top of this brief: explain the necessity to the user, tell them the package is large (not a reason to skip), then install. The user's local Word/WPS/Keynote and the python-pptx/python-docx + HTML + Playwright route are permitted **only after an install attempt has actually failed** — fidelity will be lower, and you must say so. **Install only when no equivalent renderer is already present.** After installing, register `soffice` on `PATH` and re-verify `soffice --version` (step 4 of that block) so the next probe doesn't reinstall it.
 
 ### Fallback (post-install-failure only): Spreadsheet → PDF without LibreOffice
 

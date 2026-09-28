@@ -9,11 +9,11 @@
 | `mpl_cjk.py` | matplotlib 中文字体注册 | 老版本无 `addfont`，字体名 fallback 成方块 | A 图表页 |
 | `pptx_bg.py` | 克隆 `<p:bg>` 背景并重绑图片关系 | 直接复制 rId 在目标页解析不到，背景丢失 | A1 官方模板轨 |
 | `pptx_qa.py` | 遍历查占位符/越界/溢出估算/文本重叠 | 每次现写遍历代码、口径不一 | A 验收 |
-| `render_preview.py` | office → PDF → 逐页 PNG | 每次现写 soffice/渲染命令 | A / B / C 视觉验收 |
+| `render_preview.py` | office → PDF → 逐页 PNG（**多后端探测**：PowerPoint/Word/WPS/LibreOffice） | 每次现写渲染命令；且误把 LibreOffice 当唯一渲染器 | A / B / C 视觉验收 |
 
 ## 运行环境
 
-依赖：`python-pptx`、`python-docx`、`pymupdf`；渲染另需 LibreOffice（`soffice`）。
+依赖：`python-pptx`、`python-docx`、`pymupdf`；渲染需要一个渲染器——**本机 PowerPoint/Word/WPS（Windows 经 `pywin32`）或 LibreOffice**，`render_preview.py` 会自动探测并选最忠实的一个。
 本机开发环境：conda `py12`（Python 3.10）。CLAUDE.md 约定按需选/建环境。
 
 ## 说明

@@ -418,10 +418,10 @@ def env_check(argv: list):
             print(f"  \u2713 {name}{detail}")
         elif on_demand_required:
             print(f"  \u25cb {name} (not installed \u2014 MUST be installed, not substituted)")
-            print(f"      \u2192 FORBIDDEN: using Word/WPS/Keynote/Pages instead of installing it.")
+            print(f"      \u2192 an installed Word/WPS/Keynote/Pages is a valid renderer; installing it.")
             print(f"        A large download is NOT a reason to skip it.")
             print(f"        REQUIRED: explain the necessity to the user, tell them the package is")
-            print(f"        large, then INSTALL it. No install attempt = no substitute program.")
+            print(f"        large, then INSTALL it. Install only when no equivalent renderer is already present.")
         elif optional:
             print(f"  \u25cb {name} (optional, not installed \u2014 install on demand)")
         else:
@@ -460,9 +460,9 @@ def env_check(argv: list):
     print("  LibreOffice: PREFERRED \u2192 Tsinghua mirror https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/")
     print("               (pick deb/rpm/mac/win subdir for your arch; newest version if 26.8.0 is gone)")
     print("               fallback: brew install --cask libreoffice (macOS) / sudo apt install libreoffice-core (Linux)")
-    print("               ↳ MUST be installed, never substituted. Using Word/WPS/Keynote instead")
-    print("                 is forbidden; a large download is NOT a reason to skip it. Explain the")
-    print("                 necessity to the user, then install. No install attempt = no substitute.")
+    print("               ↳ Preferred; an installed Word/PowerPoint/WPS is a valid renderer too.")
+    print("                 Install LibreOffice only if none is present. If you must install, do not")
+    print("                 decide for the user that it is too large — explain the need and proceed.")
     print("  Tectonic:    curl -fsSL https://drop-sh.fullyjustified.net | sh            # downloads LaTeX packages on first run")
     raise SystemExit(rc)
 
@@ -1831,19 +1831,19 @@ def convert_office(argv: list):
     if binary is None:
         Output.error(
             "DependencyMissing",
-            "LibreOffice not found — you MUST install it, not substitute it",
+            "No renderer found for Office→PDF",
             hint=(
-                "FORBIDDEN: using Word / WPS / Keynote / Pages / any program already on this "
-                "machine INSTEAD of installing LibreOffice. FORBIDDEN: deciding the download is "
-                "too large to bother with — being large is NOT a reason to skip it. FORBIDDEN: "
-                "asking the user whether to use Word instead. "
+                "An already-installed Word / WPS / Keynote / Pages IS a valid renderer — use it; "
+                "no download needed. Only when none of them exists should you install LibreOffice. "
+                "If you do install, do not decide on the user's behalf that it is too large. "
+                "Do not ship the PDF unverified. "
                 "REQUIRED, in order: (1) explain to the user that LibreOffice is the engine that "
                 "preserves themes, layouts, master slides, fonts and pagination faithfully; "
                 "(2) tell them the package is large (several hundred MB) and may take a while — "
                 "this is information for them, not a decision point for you; "
                 "(3) install it NOW — PREFERRED source is the Tsinghua TUNA mirror 'https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/': pick the subdirectory for this platform/arch (deb/x86_64, deb/aarch64, rpm/x86_64, mac/aarch64, mac/x86_64, win/x86_64, win/aarch64) and install the main package from it; if 26.8.0 is gone, use the newest version under '.../libreoffice/stable/'. Package-manager FALLBACK only if the mirror is unreachable: macOS 'brew install --cask libreoffice'; Debian/Ubuntu 'sudo apt install libreoffice-core'; Windows 'winget install TheDocumentFoundation.LibreOffice'. "
                 "ONLY after that install has been attempted AND failed may you use another "
-                "program — report the failure. No install attempt = no substitute program."
+                "program — report the failure. Install only when no equivalent renderer is already present."
             ),
         )
 

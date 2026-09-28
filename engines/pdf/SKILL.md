@@ -688,7 +688,7 @@ palette.cascade --title "..." --format reportlab           # Ready-to-paste Repo
 | Report | ReportLab + pypdf | **ReportLab cover (`cover_render.py`)** | ❌ (tofu □) | Manual pagination |
 | Creative | Playwright *(optional)* | html2pdf-next.js (pdf-lib for post-processing) | ✅ native | ✅ any size |
 | Academic | Tectonic *(optional)* + pypdf | **ReportLab cover (`cover_render.py`)** | ❌ (dropped) | Template-dependent |
-| Process | pikepdf, pdfplumber | LibreOffice (soffice) *(install on demand — not substitutable)* | N/A | N/A |
+| Process | pikepdf, pdfplumber | LibreOffice (soffice) *(install on demand — an installed Word/WPS works too)* | N/A | N/A |
 
 > **Cover System (V4.0)**: Report and Academic covers are rendered with **ReportLab** via
 > `scripts/cover_render.py` (templates 01–05 report, 06–08 academic dark, 09 institutional) and
@@ -699,9 +699,9 @@ palette.cascade --title "..." --format reportlab           # Ready-to-paste Repo
 > **Optional engines**: Playwright/Chromium (Creative/poster/HTML→PDF) and Tectonic (Academic/LaTeX)
 > are optional — probe first and ask the user before installing (large downloads / long waits).
 >
-> **LibreOffice (Office→PDF) is different — you MUST install it, not substitute it.** Using Word,
-> WPS, Keynote or Pages *instead of* installing is forbidden, and a large download is **not** a reason
-> to skip it. Required: explain the necessity to the user (only engine that preserves
+> **For Office→PDF, an installed Word/PowerPoint/WPS is a valid renderer — use it** (more faithful
+> for its own format, and no download). Only when none is installed should you install LibreOffice —
+> then explain the necessity to the user (LibreOffice preserves
 > themes/layouts/master slides faithfully), say the package is large, then install it — **preferred
 > source is the Tsinghua TUNA mirror**
 > `https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/` (pick the
@@ -714,7 +714,7 @@ palette.cascade --title "..." --format reportlab           # Ready-to-paste Repo
 > `/usr/local/bin`, Windows `setx` the program dir onto the user `PATH`). So **probe before
 > installing**: a binary already on disk but off-`PATH` needs registering, not reinstalling.
 > Another program is permitted **only after** an
-> install attempt has actually failed. **No install attempt = no substitute program.**
+> install attempt has actually failed. **Install only when no equivalent renderer is already present.**
 > See `briefs/process.md` and `env_setup/setup.md` (→ *"Register the binary on PATH"*) for the full
 > procedure.
 >

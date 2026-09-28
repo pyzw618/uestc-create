@@ -79,12 +79,12 @@ pdftoppm -png -r 200 input.pdf page
 
 **Best for**: Visual layout analysis, comparing formatting, generating previews, when user asks "what does it look like".
 
-> 🔴 **This route needs LibreOffice — if it is missing you MUST install it, not substitute it.**
+> 🔴 **This route needs a renderer — an installed Word/WPS counts as one. Install LibreOffice only if none is present.**
 > Using Word/WPS/Pages to make the preview *instead of* installing is forbidden, and a large download
 > is **not** a reason to skip. Required: explain the necessity (it renders the document exactly as
 > laid out, which is the whole point of a visual check), say the package is large, then install it **from the Tsinghua TUNA mirror** (`https://mirrors.tuna.tsinghua.edu.cn/libreoffice/libreoffice/stable/26.8.0/`, or the newest version under `.../libreoffice/stable/`; package-manager commands are the fallback). Only
 > after an install attempt has **failed** may you use another program, and you must say so.
-> **No install attempt = no substitute program.** After installing, **register `soffice` on `PATH`
+> **Install only when no equivalent renderer is already present.** After installing, **register `soffice` on `PATH`
 > and re-verify `soffice --version`** (per-OS commands: `env_setup/setup.md` → *"Register the binary
 > on PATH"*) — an install left off the search path reads as "not installed" next time and gets
 > reinstalled needlessly. See `SKILL.md`.
