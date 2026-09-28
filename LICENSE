@@ -1,0 +1,35 @@
+MIT License
+
+Copyright (c) 2026 pyzw618
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+------------------------------------------------------------------------------
+本仓库整体以 MIT 发布，但随包分发的第三方内容保留其原始许可，不因本文件而改变：
+
+1. engines/docx、engines/pdf、engines/pptx（改造自 Z.AI 官方 documents/pdf/presentations
+   技能）：个人/教育/非商业用途，原许可见各目录下 LICENSE.txt。
+2. 电子科技大学官方视觉物料（官方 PPT 模板、校徽、校训、学院标识等）：版权归电子科技
+   大学所有，仅限校内学习使用。
+3. assets/course-papers/latex/（ThesisUESTC 衍生）：LPPL-1.3c，见
+   assets/course-papers/latex/LICENSE-LPPL-1.3c。
+4. assets/icons-charts/（ppt-master 子集及 Tabler/Phosphor 图标）：MIT，第三方声明见
+   assets/icons-charts/THIRD_PARTY_NOTICES.md。
+
+各许可的适用范围以对应目录下的许可文件与 README.md「许可」一节为准。
