@@ -12,8 +12,11 @@ Skill/Read 工具调用了该 shim。
 用法：
   python run_trigger_eval.py --eval-set trigger-eval.json --skill-path <包根>
       [--description "覆盖描述"] [--model sonnet] [--runs-per-query 2]
-      [--workers 6] [--timeout 90] [--json-out results.json]
+      [--workers 3] [--timeout 180] [--json-out results.json]
 
+**并发警告**：每次 `claude -p` 启动都要加载全部插件与 hook，很重（单次几十秒）。
+并发过高（实测 workers=6 + timeout=90）会**全部超时**，表现为"所有查询 rate=0.0"
+的假象——包括本该触发的。建议 workers ≤ 3、timeout ≥ 180；脚本会打印非正常结束数。
 退出码 0。
 """
 import argparse
@@ -46,12 +49,12 @@ def skill_description(skill_path):
 
 
 def run_one(query, shim_name, cwd, model, timeout):
-    """返回 True 表示模型调用了 shim。"""
+    """返回 (triggered, status)。status ∈ ok / timeout / error / empty。"""
     cmd = ["claude", "-p", query, "--output-format", "stream-json", "--verbose"]
     if model:
         cmd += ["--model", model]
     env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                          cwd=cwd, env=env)
 
     timed_out = {"v": False}
@@ -66,15 +69,18 @@ def run_one(query, shim_name, cwd, model, timeout):
     t = threading.Timer(timeout, watchdog)
     t.start()
     try:
-        out = p.stdout.read() or b""
+        out, err = p.communicate()
     finally:
         t.cancel()
 
     if timed_out["v"]:
-        raise TimeoutError("query timeout")
+        return False, "timeout"
+    if not out:
+        return False, "error:" + (err or b"")[-120:].decode("utf-8", "replace")
 
     triggered = False
-    for line in out.decode("utf-8", errors="replace").splitlines():
+    saw_assistant = False
+    for line in (out or b"").decode("utf-8", errors="replace").splitlines():
         line = line.strip()
         if not line:
             continue
@@ -82,9 +88,9 @@ def run_one(query, shim_name, cwd, model, timeout):
             ev = json.loads(line)
         except json.JSONDecodeError:
             continue
-        if ev.get("type") != "assistant":
-            continue
-        for item in ev.get("message", {}).get("content", []):
+        if ev.get("type") == "assistant":
+            saw_assistant = True
+        for item in ev.get("message", {}).get("content", []) if ev.get("type") == "assistant" else []:
             if item.get("type") != "tool_use":
                 continue
             name, inp = item.get("name"), item.get("input", {}) or {}
@@ -92,7 +98,7 @@ def run_one(query, shim_name, cwd, model, timeout):
                 triggered = True
             elif name == "Read" and shim_name in str(inp.get("file_path", "")):
                 triggered = True
-    return triggered
+    return triggered, ("ok" if saw_assistant else "empty")
 
 
 def main():
@@ -102,8 +108,8 @@ def main():
     ap.add_argument("--description", default=None)
     ap.add_argument("--model", default="sonnet")
     ap.add_argument("--runs-per-query", type=int, default=1)
-    ap.add_argument("--workers", type=int, default=6)
-    ap.add_argument("--timeout", type=int, default=90)
+    ap.add_argument("--workers", type=int, default=3)
+    ap.add_argument("--timeout", type=int, default=120)
     ap.add_argument("--json-out", default=None)
     a = ap.parse_args()
 
@@ -129,14 +135,21 @@ def main():
                 pass
             from concurrent.futures import as_completed
             per_query = {}
+            problems = []
             for f in as_completed(futs):
                 it = futs[f]
                 q = it["query"]
                 try:
-                    trg = f.result()
-                except Exception:
-                    trg = False
+                    trg, st = f.result()
+                except Exception as e:
+                    trg, st = False, "exc:%s" % e
                 per_query.setdefault(q, []).append(trg)
+                if st != "ok":
+                    problems.append("%s ← %s" % (q[:24], st))
+            if problems:
+                print("⚠ 非正常结束 %d/%d：" % (len(problems), len(jobs)))
+                for p in problems[:8]:
+                    print("   ", p)
         for it in items:
             q = it["query"]
             trs = per_query.get(q, [False])
