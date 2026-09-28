@@ -23,7 +23,7 @@ Check both on every page:
 
 Office-scenario optimization — what each format needs specially:
 
-- **pptx** — judge at presentation distance: each slide must land in one glance; watch for text colliding with or spilling off cards and shapes, a single card or container left half empty (that too is uneven visual distribution), chart labels too small to read when projected, and cross-slide consistency (page numbers, headers, palette).
+- **pptx** — judge at presentation distance: each slide must land in one glance; watch for text colliding with or spilling off cards and shapes, a single card or container left half empty (that too is uneven visual distribution), multi-column or side-by-side card groups whose bottom edges don't align (one column visibly shorter than its neighbor, stranding a blank region below), decorative edge stripes/color bars along card edges, chart labels too small to read when projected, and cross-slide consistency (page numbers, headers, palette).
 - **docx** — judge at reading distance; watch for pagination artifacts (near-blank pages, headings orphaned at a page bottom, boxes broken across pages), TOC entries without page numbers, figures that rendered blank, and header/footer/page-number continuity across sections.
 - **xlsx** — judge the rendered sheet views; watch for columns clipped to `####`, visible error values, charts whose type or labels misrepresent the data, wide tables sliced across print pages, and whether the dashboard reads as a whole.
 - **pdf** — watch for content crowding or crossing the page margins, broken column flow in multi-column layouts, bad page breaks (a heading or caption stranded alone), and for posters and covers the first-glance impression.

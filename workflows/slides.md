@@ -33,7 +33,7 @@
 1. 按 `references/slides/brand.md`：选配色家族（蓝橙学术风/深蓝高级风/深蓝科技风/主题化配色/校徽蓝+银杏黄特色）。
 2. 成电元素齐备：校标组合（header/封面）、校训水印（封面/结尾）、线稿（目录页）、银杏（点缀，单页 ≤3）；版本正确（白版深底/蓝版浅底）。
 3. 长 deck（≥25 页）上左侧导航条（P-16 模式）；分节用数字分节页或提纲回现。
-4. 排版遵守 `engines/pptx/SKILL.md` Part 1 设计规范与 Part 2 API 要点（LAYOUT_WIDE、bullet 样式化、阴影参数、避免 AI 味版式：无标题下划线、无彩色边条、卡片 ≤1/5 页）。
+4. 排版遵守 `engines/pptx/SKILL.md` Part 1 设计规范与 Part 2 API 要点（LAYOUT_WIDE、bullet 样式化、阴影参数、避免 AI 味版式：无标题下划线、无彩色边条、卡片 ≤1/5 页）；多列卡组顶/底边对齐、卡内文字填充率与卡头对齐细则见 `references/slides/brand.md` §2–3；视觉锚点选型可参考 `references/slides/charts.md` §4 适配场景——含编号卡/功能行/分节卡的页面有合适图标就配，没有就不硬加，禁止 emoji 与文本圈号顶替。
 
 ### A3 beamer 支线
 按 `scenarios.md` §7 基线（Madrid+whale、169、columns、脚注引源、红字标签）与其**编译实测要点**（缺图重建 / 多页 PDF 素材的 page+trim 裁切 / 占位图用 PIL 生成 / -no-pdf 分离诊断）；`xelatex` 编译交付 PDF（该链已在 TeX Live 2025 实测，14 页通过）。

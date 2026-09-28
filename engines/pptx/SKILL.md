@@ -83,6 +83,7 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
 - **One key message per slide** — never overcrowd. Visual hierarchy: title → subtitle → body → supporting detail.
 - **Control the amount of text per slide.** Too much text is the most common cause of overflow. Keep bullets concise (a short phrase, not a full sentence), avoid dense paragraphs, and if a slide is getting text-heavy, trim it or split it across two slides. The goal is comfortable density, not empty slides — just don't overpack.
 - **Leave breathing room** — give each text box enough width/height that the text fits comfortably at its font size with margin to spare, rather than filling the box edge-to-edge.
+- **Under-filled containers are a defect symmetric to overflow.** Target ~70–85% vertical fill of every card/text box: text occupying less than half the container reads as broken. Fix in order: scale up the font (large cards may carry 16–18pt body) → increase line spacing (1.3–1.5) → restore trimmed content into the card → shrink the card. Estimate capacity before writing: lines ≈ h_in × 72 × 0.85 ÷ (font_pt × line_spacing).
 - **Vary the rhythm** — alternate between text-driven, image-driven, and data-driven slides.
 - **No large blank areas.** Don't leave a big region of the canvas empty. Resolve it with CONTENT — enlarge the type or the focal element, widen the chart or image, tighten the grid and margins, or promote real content (a pull quote, a caption, a supporting figure) into that space.
 - **Never fill space with content-free decoration** — no filler bars, strips, rules, or flat color blocks whose only purpose is to occupy emptiness. A graphic element must separate, group, or emphasize real content; otherwise leave the space alone.
@@ -98,6 +99,8 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
 - **Label everything**: axis titles, units, categories, and direct value labels on bars/points. Drop chart junk — no 3D, no gradients, no unnecessary gridlines or legends when direct labels suffice.
 - **Cite the source for every key figure and every chart**: a small source line (10–12pt, muted) at the bottom of the slide, e.g. "Source: IDC Worldwide Tracker, 2025" or "Source: company 10-K, FY2024".
 - Never present an invented number as sourced. If a figure is an estimate or illustrative, label it as such ("illustrative", "est.").
+
+**Icons & SVG assets (use with judgment):** icons and SVG diagrams are one option among several — reach for them when they genuinely aid scanning (numbered or feature cards, agenda rows, diagrams native shapes draw poorly); the package ships a curated icon set (`assets/icons-charts/icons/`, indexed by `index.json`) plus 33 SVG chart templates (`assets/icons-charts/charts/`). Inline SVG works in modern PowerPoint/M365; rasterize to a 2–3× PNG for maximum compatibility. Never substitute emoji or text circled numbers (①②③) for icons — if no fitting icon exists, drop the ornament. A few icons per page, one style per page.
 
 ## 5. Image + text layering (critical)
 
@@ -129,6 +132,7 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
 - **0.3–0.5"** between content blocks
 - Consistent margins and spacing across all slides
 - Leave breathing room — don't fill every inch
+- **Multi-column & side-by-side card groups must share BOTH top and bottom edges.** When two columns hold different numbers of items, never stack them at one fixed item height and let the shorter column end early — rebalance instead: adjust item heights, absorb the extra space into item padding/gaps, or regroup items, so both columns land on the same bottom baseline. A column ending visibly higher than its neighbor reads as a broken grid and strands a blank region below it.
 
 ## 8. CJK fonts
 
@@ -142,7 +146,7 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
 
 - ❌ **Don't reuse the same layout on every slide** — vary between columns, cards, and callouts
 - ❌ **Don't overuse grid layouts** — card/tile grids (2×2, 3×2, 4-up …) are a strong AI-slide tell when repeated. Cap them at roughly **1 in 5 content slides**, never on consecutive slides, and only when the content is genuinely a set of peer items (team, feature matrix). For everything else use a focal-point, column, timeline, or diagram layout instead
-- ❌ **Don't center body text** — left-align paragraphs and lists; center only titles
+- ❌ **Don't center body text** — left-align paragraphs and lists; center only titles. Card/bar headers may be centered or left-aligned per layout — standalone symmetric cards and tinted header bars read better centered; cards with flowing body text stay left. Use at least two header alignments across the deck; never one treatment everywhere
 - ❌ **Make size contrast big enough** — titles need 36pt+ to stand out from body text
 - ❌ **Don't default to blue** — choose colors that reflect the topic
 - ❌ **Don't mix spacing randomly** — pick 0.3" or 0.5" and use it consistently
