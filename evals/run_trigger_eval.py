@@ -147,31 +147,44 @@ def main():
                     trg, st = f.result()
                 except Exception as e:
                     trg, st = False, "exc:%s" % e
-                per_query.setdefault(q, []).append(trg)
+                per_query.setdefault(q, []).append((trg, st))
                 if st != "ok":
                     problems.append("%s ← %s" % (q[:24], st))
             if problems:
-                print("⚠ 非正常结束 %d/%d：" % (len(problems), len(jobs)))
+                print("⚠ 非正常结束 %d/%d —— 已从分母剔除，不计为「未触发」"
+                      "（否则 should-not 超时会假通过）：" % (len(problems), len(jobs)))
                 for p in problems[:8]:
                     print("   ", p)
         for it in items:
             q = it["query"]
-            trs = per_query.get(q, [False])
-            rate = sum(trs) / len(trs)
+            pairs = per_query.get(q, [(False, "ok")])
+            valid = [t for t, st in pairs if st == "ok"]
             should = it["should_trigger"]
+            if not valid:
+                results.append({"query": q, "should_trigger": should,
+                                "trigger_rate": None, "pass": None,
+                                "note": "inconclusive（全部超时/出错）"})
+                continue
+            rate = sum(valid) / len(valid)
             ok = rate >= 0.5 if should else rate < 0.5
             results.append({"query": q, "should_trigger": should,
-                            "trigger_rate": round(rate, 3), "pass": ok})
+                            "trigger_rate": round(rate, 3),
+                            "valid_runs": len(valid), "runs": len(pairs),
+                            "pass": ok})
     finally:
         for stale in cmd_dir.glob(f"{skill_name}-skill-*.md"):
             stale.unlink()
 
-    passed = sum(1 for r in results if r["pass"])
+    passed = sum(1 for r in results if r["pass"] is True)
+    total = len(results)
+    n_inc = sum(1 for r in results if r["pass"] is None)
     print(f"description: {desc[:80]}...")
-    print(f"{'✓' if passed == len(results) else '·'} 通过 {passed}/{len(results)}")
+    print(f"{'✓' if passed == total else '·'} 通过 {passed}/{total}"
+          + (f"（{n_inc} 条 inconclusive）" if n_inc else ""))
     for r in results:
-        mark = "✓" if r["pass"] else "✗"
-        print(f"  {mark} rate={r['trigger_rate']:<5} should={str(r['should_trigger']):<5} {r['query']}")
+        mark = "✓" if r["pass"] else ("?" if r["pass"] is None else "✗")
+        print(f"  {mark} rate={str(r['trigger_rate']):<5} "
+              f"should={str(r['should_trigger']):<5} {r['query']}")
     summary = {"description": desc, "passed": passed, "total": len(results),
                "results": results}
     if a.json_out:
