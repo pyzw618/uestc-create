@@ -10,16 +10,18 @@ import sys
 from pathlib import Path
 
 
-def skill_root() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
 def template_root() -> Path:
-    return skill_root() / "assets" / "template"
+    # 模板与本源文件同目录（assets/course-papers/latex/）
+    return Path(__file__).resolve().parent
 
 
 def iter_template_files(root: Path) -> list[Path]:
-    return sorted(path for path in root.rglob("*") if path.is_file())
+    # 复制目录下全部文件，但排除本源文件自身
+    skip = {Path(__file__).resolve().name}
+    return sorted(
+        path for path in root.rglob("*")
+        if path.is_file() and path.name not in skip
+    )
 
 
 def relative_template_files(root: Path) -> list[Path]:
