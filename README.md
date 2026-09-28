@@ -42,6 +42,24 @@ engines/
   visual-judge.md       视觉验收提示词（子 agent 可派发；无子 agent 能力按其自查）
 ```
 
+## 兼容性与平台
+
+**Agent 兼容性**：内容与 agent 无关——不依赖任何宿主专属工具（无 Task/Skill/artifacts 之类调用）。子 agent 全程**可选**：视觉验收与独立打分处都写了"无子 agent 能力时按同一标准自查"的降级路径（`engines/visual-judge.md`、`evals/grader.md`）。
+唯一前提：「技能被自动发现」依赖宿主具备 skill 机制（如 SKILL.md 约定）；在不具备该机制的框架或裸 API 下，内容同样可用，但需把 `SKILL.md` 显式交给模型。
+
+**平台兼容性**：
+
+| 项 | Windows | Linux / macOS |
+|---|---|---|
+| python 脚本（`scripts/`、`evals/`） | ✅ 已实测 | 静态审计通过，**未实机验证** |
+| 渲染器 | PowerPoint / Word / WPS（经 `pywin32` COM） | LibreOffice（`soffice`） |
+| 中文字体默认 | 微软雅黑 | Linux: Noto Sans CJK SC · macOS: PingFang SC |
+| shell 脚本（`engines/*/env_check.sh`、`setup.sh`） | 需 Git Bash 或 WSL | ✅ 原生 bash |
+
+渲染器是**探测式**的：`scripts/render_preview.py` 自动选本机最忠实的一个（原生渲染对自家格式更准），一个都没有时才提示安装 LibreOffice。缺中文字体时 `mpl_cjk.py` 会**显式告警**，不会静默渲染出方块。
+
+> Linux / macOS 结论来自代码静态审计，未在相应系统上实跑。
+
 ## 验证与自检
 
 - `evals/check_deliverable.py <file>`：纯标准库机检（占位符 / 禁用词 / 模糊数字词 / 个人信息 / emoji / 单块密度），有 hard fail 时返回非零。各路线 workflow 的验收步已接入。
