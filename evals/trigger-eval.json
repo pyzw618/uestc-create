@@ -1,0 +1,22 @@
+[
+  {"query": "下周要交数电实验三的报告，数据在 lab3.xlsx 里，按标准格式写一份", "should_trigger": true},
+  {"query": "帮我把这篇论文做成组会汇报的 PPT，12 页左右", "should_trigger": true},
+  {"query": "党史课期末论文，3000 字，题目自选", "should_trigger": true},
+  {"query": "我下个月开题，帮我理一理要做哪些事", "should_trigger": true},
+  {"query": "信号与系统课设报告用 Word 写，数据我整理好了", "should_trigger": true},
+  {"query": "做个答辩 PPT，用官方蓝模板", "should_trigger": true},
+  {"query": "马原论文要交了，2000 字，怎么写", "should_trigger": true},
+  {"query": "帮我准备中期检查要讲的内容，以及接下来半年的安排", "should_trigger": true},
+  {"query": "综合课程设计论文有模板吗，怎么写", "should_trigger": true},
+  {"query": "帮我做个组会 pre 的 slides，中英混着说也行", "should_trigger": true},
+  {"query": "帮我把这个实验做了，数据我还没测", "should_trigger": true},
+  {"query": "帮我写个 Python 脚本读取 CSV 并画折线图", "should_trigger": false},
+  {"query": "把这篇英文论文翻译成中文，我要读懂它", "should_trigger": false},
+  {"query": "帮我把简历转成 PDF", "should_trigger": false},
+  {"query": "Overleaf 报错 Missing $ inserted 怎么解决", "should_trigger": false},
+  {"query": "帮我做个 Excel 成绩统计表，算平均分和排名", "should_trigger": false},
+  {"query": "推荐几篇关于 transformer 的综述论文", "should_trigger": false},
+  {"query": "帮我把这张照片背景去掉", "should_trigger": false},
+  {"query": "帮我写份周报，总结这周的工作", "should_trigger": false},
+  {"query": "解释一下快速排序的时间复杂度为什么是 O(n log n)", "should_trigger": false}
+]

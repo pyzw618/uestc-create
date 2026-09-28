@@ -74,7 +74,7 @@ metadata:
 
 ## 路径约定
 
-包内文档互相引用时，除另有说明，一律使用**包根相对路径**（以 SKILL.md 所在目录为基准，如 `references/slides/brand.md`、`engines/pptx/SKILL.md`）；engines/ 各引擎内部的引用以该引擎目录为根（官方原文约定）。载入顺序：SKILL.md 路由 → 对应 workflow → workflow 引用的 references 与 engines 文档。
+包内文档互相引用时，除另有说明，一律使用**包根相对路径**（以 SKILL.md 所在目录为基准，如 `references/slides/brand.md`、`engines/pptx/SKILL.md`）；engines/ 各引擎内部的引用以该引擎目录为根（官方原文约定）。载入顺序：SKILL.md 路由 → 对应 workflow → workflow 引用的 references 与 engines 文档。references 中样本代号（B-/P-/C-）的体系与证据强度见 `references/evidence.md`。
 
 ## 语言约定
 
