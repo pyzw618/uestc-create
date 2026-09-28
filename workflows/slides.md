@@ -46,9 +46,10 @@
 
 ## ⚠ 第 4 步：验收（硬性）
 
-1. 代码 QA：python-pptx 遍历检查溢出/越界/重叠/占位符残留（engines/pptx §10）。
-2. 渲染 QA：soffice→PDF→PNG 逐页图，按 `engines/visual-judge.md` 提示词验收（无子 agent 则自查）；fail 项修复后复查。
-3. 过 `references/slides/checklist.md` A→E，报告结果。
+1. 机检：`python evals/check_deliverable.py <成品.pptx>` 跑客观断言（占位符/禁用词/模糊数字/个人信息/密度），hard fail 先清零。
+2. 代码 QA：python-pptx 遍历检查溢出/越界/重叠/占位符残留（engines/pptx §10）。
+3. 渲染 QA：soffice→PDF→PNG 逐页图，按 `engines/visual-judge.md` 提示词验收（无子 agent 则自查）；fail 项修复后复查。
+4. 过 `references/slides/checklist.md` A→E；需要独立判定时派 `evals/grader.md`，报告结果。
 
 ## 边界
 

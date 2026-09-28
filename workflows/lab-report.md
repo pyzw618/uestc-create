@@ -51,7 +51,8 @@
 
 ## ⚠ 第 5 步：交付前自检（硬性）
 
-按 `references/lab-report/checklist.md` A→D 逐项过；向用户报告结果（全过 / 未过项+原因）。
+先跑机检 `python evals/check_deliverable.py <成品.docx>`（占位符/禁用词/模糊数字/个人信息），hard fail 清零。
+按 `references/lab-report/checklist.md` A→D 逐项过；向用户报告结果（全过 / 未过项+原因）。需要独立判定时派 `evals/grader.md`。
 用 `engines/docx` 能力转 PDF 预览版式（LibreOffice）；有视觉验收能力时按 `engines/visual-judge.md` 渲染页图自查。
 
 ## 合并型分支（基础+挑战 / 多实验）

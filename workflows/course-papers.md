@@ -36,10 +36,11 @@
 
 ## ⚠ 第 4 步：验收（硬性）
 
-1. 过 `references/course-papers/checklist.md` A→E。
-2. LaTeX：编译零 error、交叉引用无 "？?"、目录正文一致；Word：渲染 PDF 逐页目验（版式/缩进/编号）。
-3. 字数核对（正文净字数，不含参考文献）。
-4. 个人信息与 AI 素材声明检查（E 组）。
+1. 机检：`python evals/check_deliverable.py <成品.docx>` 跑客观断言（占位符/禁用词/模糊数字/个人信息），hard fail 清零。LaTeX 轨成品为 PDF，可先导出文本再过同一断言表。
+2. 过 `references/course-papers/checklist.md` A→E；需要独立判定时派 `evals/grader.md`。
+3. LaTeX：编译零 error、交叉引用无 "？?"、目录正文一致；Word：渲染 PDF 逐页目验（版式/缩进/编号）。
+4. 字数核对（正文净字数，不含参考文献）。
+5. 个人信息与 AI 素材声明检查（E 组）。
 
 ## 弹性做法
 

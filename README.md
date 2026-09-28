@@ -39,6 +39,13 @@ engines/
   visual-judge.md       视觉验收提示词（子 agent 可派发；无子 agent 能力按其自查）
 ```
 
+## 验证与自检
+
+- `evals/check_deliverable.py <file>`：纯标准库机检（占位符 / 禁用词 / 模糊数字词 / 个人信息 / emoji / 单块密度），有 hard fail 时返回非零。各路线 workflow 的验收步已接入。
+- `evals/grader.md`：独立验收 agent 提示词（生成者≠裁判）；有子 agent 能力时派发。
+- `evals/evals.json`、`evals/trigger-eval.json`：行为 eval 集与触发评测集（20 条 should/should-not）。
+- `evals/run_trigger_eval.py`：Windows 可用的触发评测。上游 skill-creator 的 `run_eval.py` 用 `select()` 读管道，Windows 不支持（WinError 10038），故本包自带替代版。
+
 ## 素材与许可
 
 | 内容 | 来源与许可 | 说明 |
