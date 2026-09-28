@@ -1,0 +1,21 @@
+# ── uestc-create ──
+# 用户本机个人信息，绝不随包分发
+/config/user.yaml
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 若误在包内直接编译 LaTeX，忽略其产物（不影响 assets/ 下的模板与素材）
+/main.pdf
+/main.aux
+/main.log
+/main.out
+/main.toc
+/main.bbl
+/main.blg
+/main.synctex.gz
+
+# 渲染/转换中间产物
+/_render/
+/_preview/

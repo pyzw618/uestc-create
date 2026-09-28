@@ -1,0 +1,81 @@
+\documentclass[course]{thesis-uestc}
+
+\course{课程名称}
+\title{课程报告题目}{Course Report Title}
+\author{学生姓名}{Student Name}
+\studentnumber{202600000000}
+\school{学院名称}{School Name}
+\major{专业名称}{Major Name}
+\completiondate{2026年5月7日}
+
+\begin{document}
+
+\makecover
+
+\thesistableofcontents
+
+\chapter{引言}
+
+\section{研究背景}
+
+这里写课程报告的背景、问题来源和任务要求。课程报告通常不需要中英文摘要、原创性声明、插图目录、表格目录、符号表、致谢和成果清单。
+
+\section{报告结构}
+
+这里简要说明全文安排。本文后续章节演示公式、图表、交叉引用和参考文献的基本写法。
+
+\chapter{方法与实现}
+
+\section{基本方法}
+
+正文可以直接使用中文、英文和数学公式。设目标函数为
+\begin{equation}
+  \label{eq:objective}
+  J(\bm{x})=\sum_{i=1}^{n}(y_i-\bm{w}^{\mathrm{T}}\bm{x}_i)^2+\lambda\lVert\bm{w}\rVert_2^2 .
+\end{equation}
+式\ref{eq:objective}展示了一个带正则项的最小二乘目标。
+
+\section{图表示例}
+
+图\ref{fig:logo-example}和表\ref{tab:example}展示了报告中常用的浮动体写法。
+
+\begin{figure}[h]
+  \includegraphics[width=0.28\textwidth]{logo.pdf}
+  \caption{校徽图片示例}
+  \label{fig:logo-example}
+\end{figure}
+
+\begin{table}[h]
+  \caption{实验参数示例}
+  \label{tab:example}
+  \begin{tabular}{ccc}
+    \toprule
+    参数 & 取值 & 说明 \\
+    \midrule
+    $n$ & 100 & 样本数量 \\
+    $\lambda$ & 0.01 & 正则化系数 \\
+    迭代次数 & 50 & 最大迭代轮数 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\chapter{结果与分析}
+
+\section{实验结果}
+
+这里描述实验设置、数据来源和主要结果。引用文献时可以继续使用模板提供的命令，例如\citing{wang1999sanwei,liuxf2006}。
+
+\section{讨论}
+
+这里分析结果的合理性、局限性和可能的改进方向。
+
+\chapter{总结}
+
+这里总结课程报告的主要工作和结论，并说明后续可以继续完善的方向。
+
+% Uncomment to list all entries in reference.bib.
+% \nocite{*}
+
+\thesisbibliography{reference}
+
+\end{document}

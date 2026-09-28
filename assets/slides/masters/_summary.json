@@ -1,0 +1,118 @@
+{
+ "成电 官方 红.pptx": {
+  "layouts": 11,
+  "colors": {
+   "dk1": "000000",
+   "lt1": "FFFFFF",
+   "dk2": "0F1423",
+   "lt2": "FFFFFF",
+   "accent1": "6096E6",
+   "accent2": "58B6E5",
+   "accent3": "56CA95",
+   "accent4": "FFBA55",
+   "accent5": "F18870",
+   "accent6": "EC5F74",
+   "hlink": "0563C1",
+   "folHlink": "954D72"
+  },
+  "fonts": [
+   {
+    "role": "majorFont",
+    "latin": "Arial",
+    "eastAsia": "微软雅黑"
+   },
+   {
+    "role": "minorFont",
+    "latin": "Arial",
+    "eastAsia": "微软雅黑"
+   }
+  ]
+ },
+ "成电 官方 蓝.pptx": {
+  "layouts": 11,
+  "colors": {
+   "dk1": "000000",
+   "lt1": "FFFFFF",
+   "dk2": "0F1423",
+   "lt2": "FFFFFF",
+   "accent1": "6096E6",
+   "accent2": "58B6E5",
+   "accent3": "56CA95",
+   "accent4": "FFBA55",
+   "accent5": "F18870",
+   "accent6": "EC5F74",
+   "hlink": "0563C1",
+   "folHlink": "954D72"
+  },
+  "fonts": [
+   {
+    "role": "majorFont",
+    "latin": "Arial",
+    "eastAsia": "微软雅黑"
+   },
+   {
+    "role": "minorFont",
+    "latin": "Arial",
+    "eastAsia": "微软雅黑"
+   }
+  ]
+ },
+ "成电 白 风景.pptx": {
+  "layouts": 16,
+  "colors": {
+   "dk1": "000000",
+   "lt1": "FFFFFF",
+   "dk2": "44546A",
+   "lt2": "E7E6E6",
+   "accent1": "609AD5",
+   "accent2": "2B7FD4",
+   "accent3": "777777",
+   "accent4": "2964C9",
+   "accent5": "1452B5",
+   "accent6": "3D3D3D",
+   "hlink": "0563C1",
+   "folHlink": "954F72"
+  },
+  "fonts": [
+   {
+    "role": "majorFont",
+    "latin": "Calibri",
+    "eastAsia": ""
+   },
+   {
+    "role": "minorFont",
+    "latin": "Calibri",
+    "eastAsia": ""
+   }
+  ]
+ },
+ "PPT_Template-UESTC_Version_DIY.pptx": {
+  "layouts": 11,
+  "colors": {
+   "dk1": "000000",
+   "lt1": "FFFFFF",
+   "dk2": "44546A",
+   "lt2": "E7E6E6",
+   "accent1": "4472C4",
+   "accent2": "ED7D31",
+   "accent3": "A5A5A5",
+   "accent4": "FFC000",
+   "accent5": "5B9BD5",
+   "accent6": "70AD47",
+   "hlink": "0563C1",
+   "folHlink": "954F72"
+  },
+  "fonts": [
+   {
+    "role": "majorFont",
+    "latin": "等线 Light",
+    "eastAsia": ""
+   },
+   {
+    "role": "minorFont",
+    "latin": "等线",
+    "eastAsia": ""
+   }
+  ]
+ }
+}

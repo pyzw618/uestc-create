@@ -1,0 +1,318 @@
+{
+ "sections": [
+  {
+   "page_cm": [
+    21.0,
+    29.7
+   ],
+   "margins_cm": {
+    "top": 2.54,
+    "bottom": 2.54,
+    "left": 3.17,
+    "right": 3.17
+   }
+  }
+ ],
+ "styles": [
+  {
+   "name": "Normal",
+   "font": "Times New Roman",
+   "size_pt": 10.5,
+   "bold": null,
+   "eastAsia": "宋体;SimSun"
+  },
+  {
+   "name": "WW8Num1z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num2z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num3z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num4z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num6z0",
+   "font": "Verdana",
+   "size_pt": null,
+   "bold": null,
+   "eastAsia": null
+  },
+  {
+   "name": "WW8Num7z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num8z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num9z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num10z0",
+   "font": "Verdana",
+   "size_pt": null,
+   "bold": null,
+   "eastAsia": null
+  },
+  {
+   "name": "WW8Num11z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num13z0",
+   "font": "Verdana",
+   "size_pt": null,
+   "bold": null,
+   "eastAsia": null
+  },
+  {
+   "name": "WW8Num14z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "WW8Num15z0",
+   "font": null,
+   "size_pt": 15.0,
+   "bold": false,
+   "eastAsia": null
+  },
+  {
+   "name": "WW8Num16z0",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "默认段落字体",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "页眉 Char",
+   "font": null,
+   "size_pt": 9.0,
+   "bold": null
+  },
+  {
+   "name": "页脚 Char",
+   "font": null,
+   "size_pt": 9.0,
+   "bold": null
+  },
+  {
+   "name": "标题样式",
+   "font": "Liberation Sans",
+   "size_pt": 14.0,
+   "bold": null,
+   "eastAsia": "Noto Sans SC"
+  },
+  {
+   "name": "Body Text",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "List",
+   "font": null,
+   "size_pt": null,
+   "bold": null,
+   "eastAsia": null
+  },
+  {
+   "name": "Caption",
+   "font": null,
+   "size_pt": 12.0,
+   "bold": null,
+   "eastAsia": null
+  },
+  {
+   "name": "索引",
+   "font": null,
+   "size_pt": null,
+   "bold": null,
+   "eastAsia": null
+  },
+  {
+   "name": "页眉与页脚",
+   "font": null,
+   "size_pt": null,
+   "bold": null
+  },
+  {
+   "name": "Header",
+   "font": null,
+   "size_pt": 9.0,
+   "bold": null
+  },
+  {
+   "name": "Footer",
+   "font": null,
+   "size_pt": 9.0,
+   "bold": null
+  }
+ ],
+ "paragraph_sketch": [
+  {
+   "style": "Normal",
+   "text": "电子科技大学             学院",
+   "size_pt": 26.0,
+   "bold": null
+  },
+  {
+   "style": "Normal",
+   "text": "标 准 实 验 报 告",
+   "size_pt": 36.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "（实验）课程名称",
+   "size_pt": 18.0,
+   "bold": null
+  },
+  {
+   "style": "Normal",
+   "text": "电子科技大学教务处制表",
+   "size_pt": 12.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "电 子 科 技 大 学",
+   "size_pt": 22.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "实   验   报   告",
+   "size_pt": 26.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "学生姓名：           学 号：            指导教师：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "实验地点：                              实验时间：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "一、实验室名称：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "二、实验项目名称：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "三、实验学时：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "四、实验原理：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "五、实验目的：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "六、实验内容：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "七、实验器材（设备、元器件）：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "八、实验步骤：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "九、实验数据及结果分析：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "十、实验结论：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "十一、总结及心得体会：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "十二、对本实验过程及方法、手段的改进建议：",
+   "size_pt": 14.0,
+   "bold": true
+  },
+  {
+   "style": "Normal",
+   "text": "报告评分：",
+   "size_pt": 10.5,
+   "bold": null
+  },
+  {
+   "style": "Normal",
+   "text": "指导教师签字：",
+   "size_pt": 14.0,
+   "bold": null
+  }
+ ],
+ "table_count": 0
+}
