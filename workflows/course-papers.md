@@ -11,7 +11,7 @@
 ## ⚠ 第 0 步：三件事一次问清（硬性）
 
 1. **子类与要求**：课程名、论文/课设性质、字数、截止、老师有无下发模板或格式文件（先扫工作区）。
-2. **载体**：课程论文默认 LaTeX（uestcreport 吸收版）；**课设报告问一次"LaTeX 还是 Word"**；老师模板是什么就用什么。
+2. **载体**：不设无条件默认——结合第 1 项答到的字数与性质给建议并请用户确认：大型（综述/结题、字数多、公式算法多、老师要求正式排版）倾向 LaTeX；小型（小论文/观点文、两三千字纯文字）倾向 Word；介于两者或用户未提字数 → 直接问一次「LaTeX 还是 Word」。老师模板是什么就用什么。
 3. **内容底料**：用户已有的观点/数据/代码/初稿；什么都没有时先做 10 分钟选题与提纲讨论，确认后再动工。
 
 ## 第 1 步：判类与骨架（references/course-papers/types.md）
@@ -29,7 +29,7 @@
 
 1. **先提纲后成文**：把骨架展开成带要点句的提纲给用户过目（长文必做；短文可略）。
 2. 载入 `../references/writing-style.md`；按 `types.md` 形态写摘要与各节；逐节过 `writing.md` 对应小节；引用格式按 `gbt7714.md` 细则执行。
-3. LaTeX 轨：以 `assets/course-papers/latex/`（uestcreport 吸收版）为底，按老师模板改封面字段与章节；`latexmk -xelatex` 编译。
+3. LaTeX 轨：用户确认 LaTeX 后，先问一句用哪套模板（附一句话差异）：`assets/course-papers/latex/`（thesis-uestc 仿学位论文章节制，适合正式大报告/结题）或 `assets/course-papers/latex-article/`（ctexart 文章式课程报告，GB/T 7714 著者-出版年引用，适合普通课程论文/小论文）；老师模板优先。`latexmk -xelatex` 编译（article 版另见其 README 的 bibtex 流程）。
 4. Word 轨：`engines/docx` 程序构建或模板填充；公式/图表按 `writing.md` §7。
 5. 图表：编号规则按子类（连续编号或章内编号图2-1）；每图必被正文引用。
 6. 思政类特别纪律：引文必须真实且逐字核对；联系实际的事例优先用用户本人经历。

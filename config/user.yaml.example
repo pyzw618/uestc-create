@@ -8,8 +8,3 @@ school: ""        # 学院全称，如：信息与软件工程学院
 major: ""         # 专业，如：软件工程
 class_no: ""      # 班号（可选，部分模板需要）
 email: ""         # 可选
-
-preferences:      # 可选偏好；留空 = 每次按各路线规则询问
-  slides_mode: ""     # A 路线默认模板轨：official（官方模板）/ custom（自建）
-  palette: ""         # A 路线默认配色：red / blue / white / ginkgo（校徽蓝+银杏黄）
-  paper_engine: ""    # C 路线默认载体：latex / word

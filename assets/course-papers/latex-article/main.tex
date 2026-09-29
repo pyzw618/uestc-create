@@ -1,0 +1,129 @@
+% ============================================================
+% 文章式课程报告模板（uestc-create · latex-article）
+% 体例：ctexart 文章式（\section 制），12pt、1.5 倍行距、
+%       GB/T 7714-2015 著者-出版年引用（(作者, 年份)）。
+% 适用：普通课程论文/小论文/课程报告；正式大报告/结题建议用
+%       上一级 ../latex/（thesis-uestc 仿学位论文章节制）。
+% 编译：xelatex 两遍；改动 .bib 后 xelatex → bibtex → xelatex ×2。
+% 说明：封面与正文均为占位文字（张三/XX课程/20XX），按课程要求替换。
+% ============================================================
+\documentclass[UTF8,a4paper,12pt]{ctexart}
+
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage[colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=green]{hyperref}
+
+\geometry{left=2.5cm, right=2.5cm, top=2.8cm, bottom=2.8cm}
+\graphicspath{{images/}}
+\onehalfspacing
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% 目录样式：点线引导 + 页码右对齐
+\titlecontents{section}
+              [0em]
+              {\bf \small\vspace{2pt}}%
+              {\contentslabel{2.5em}}%
+              {}%
+              {\titlerule*[0.5pc]{$\cdot$}\contentspage}%
+\titlecontents{subsection}
+              [2.5em]
+              {\small}%
+              {\contentslabel{2.5em}}%
+              {}%
+              {\titlerule*[0.5pc]{$\cdot$}\contentspage}%
+
+\begin{document}
+
+% ============================================================
+% 封面（占位字段：学院/课程/题目/作者/日期，请全部替换）
+% ============================================================
+\begin{titlepage}
+\begin{center}
+\includegraphics[width=\textwidth]{UESTC-Logo}\\[1cm]
+\textsc{\LARGE XX学院~$\bullet$~XX课程}\\[1.5cm]
+\HRule \\[0.4cm]
+{\huge \bfseries 课程论文题目\\[0.4cm]}
+\HRule \\[1.5cm]
+\noindent
+\emph{作者}:\quad {\bf 张三}\footnotemark[1]\\[0.5cm]
+\emph{题目}:\quad 论文副标题或英文题目（占位）\\[0.5cm]
+\emph{日期}:\quad 20XX 年 X 月
+\end{center}
+\footnotetext[1]{电子科技大学XX学院XX专业}
+\end{titlepage}
+
+% ============================================================
+% 目录
+% ============================================================
+{
+\small
+\setstretch{1.15}
+\tableofcontents
+}
+\newpage
+
+% ============================================================
+% 正文（各节均为占位文字，按"观点句 → 证据 → 小结"展开；
+%       每段 1–2 处引用为度，编号与文末条目一一对应）
+% ============================================================
+\section{引言}
+
+占位：背景（带事实或数字）→ 已有工作 → 缺口或问题 → 本文做什么、怎么做，结尾给一句路线声明。引用示例\cite{zhangsan2024}。
+
+\section{方法}
+
+占位：每小节回答一个明确的小问题。公式示例：
+\begin{equation}
+  L = \frac{1}{N}\sum_{i=1}^{N} \ell\!\left(f(x_i;\theta),\, y_i\right)
+\end{equation}
+式中 $L$ 为损失（占位），$N$ 为样本数（占位）。
+
+\begin{figure}[!ht]
+    \centering
+    % \includegraphics[width=0.85\textwidth]{example.png}
+    % 图片放 images/，正文只写文件名；删掉本注释并换成真实图片
+    \fbox{图片占位（images/example.png）}
+    \caption{图题占位（图题在图下，全文连续编号）}
+    \label{fig:example}
+\end{figure}
+
+\section{实验与分析}
+
+占位：数字先行，每图每表必有一段解读。表格示例：
+\begin{table}[!ht]
+\centering
+\caption{表题占位（表题在表上）}
+\label{tab:example}
+\begin{tabular}{lcc}
+\toprule
+方法 & 指标A & 指标B \\
+\midrule
+基线 & 0.00 & 0.00 \\
+本文 & 0.00 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{总结}
+
+占位：做出了什么、意味着什么、还剩什么；不复述方法。
+
+% ============================================================
+% 参考文献（GB/T 7714-2015 著者-出版年；条目见 Reference.bib）
+% ============================================================
+\bibliographystyle{gbt-7714-2015-author-year}
+\bibliography{Reference}
+
+\end{document}
